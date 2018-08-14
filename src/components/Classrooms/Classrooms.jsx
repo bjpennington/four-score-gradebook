@@ -5,6 +5,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 
 import Nav from '../Nav/Nav';
+import ClassroomsListItem from '../ClassroomsListItem/ClassroomsListItem';
 
 class Classrooms extends Component {
     componentDidMount() {
@@ -19,16 +20,32 @@ class Classrooms extends Component {
     }
 
     render() {
+
+        let classroomMapArray = this.props.classrooms.map((classroom, index) => {
+            return (
+                <ClassroomsListItem classroom={classroom} key={index} />
+            )
+        });
+
         let content = null;
 
         if (this.props.user.userName) {
             content = (
                 <div>
-                    <p>
-                        Classrooms
-                    </p>
-                    {JSON.stringify(this.props.classrooms)}
-
+                    <button onClick={() => this.props.history.push('/manage_classroom')}>
+                        Create New Classroom
+                    </button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {classroomMapArray}
+                        </tbody>
+                    </table>
                 </div>
             );
         }
