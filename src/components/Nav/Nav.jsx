@@ -21,9 +21,9 @@ class Nav extends Component {
               </NavLink>
             </li>
             <li>
-              <button onClick={this.logout}>
+              <NavLink to="/" onClick={this.logout}>
                 Log Out
-              </button>
+              </NavLink>
             </li>
           </ul>
         </div>
