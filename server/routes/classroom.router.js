@@ -47,7 +47,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.put('/', rejectUnauthenticated, (req, res) => {
     console.log(' classroom to edit req.body:', req.body, 'classroom to edit req.user:', req.user);
-    queryText = `UPDATE "classrooms" SET "classroom_name" = $1 WHERE "id" = $2;`
+    queryText = `UPDATE "classrooms" SET "classroom_name" = $1 WHERE "id" = $2 RETURNING "id", "classroom_name";`
     pool.query(queryText, [req.body.classroom_name, req.body.id])
         .then(response => {
             res.send(response.rows[0]);

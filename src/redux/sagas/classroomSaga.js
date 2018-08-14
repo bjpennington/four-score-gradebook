@@ -33,7 +33,11 @@ function* postClassroom(action) {
 
 function* editClassroom(action) {
     try {
-        yield call(axios.put, '/api/classroom', action.payload);
+        const updatedClassroom = yield call(axios.put, '/api/classroom', action.payload);
+        yield dispatch({
+            type: CLASSROOM_ACTIONS.SET_CURRENT_CLASSROOM,
+            payload: updatedClassroom.data
+        })
     }
     catch (error) {
         console.log('Error on classroomSaga editClassroom:', error);
