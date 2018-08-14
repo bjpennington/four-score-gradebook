@@ -5,6 +5,8 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 
 import Nav from '../Nav/Nav';
+import AddStudent from '../AddStudent/AddStudent';
+import AddStandard from '../AddStandard/AddStandard';
 
 class ManageClassroom extends Component {
     constructor(props) {
@@ -70,62 +72,12 @@ class ManageClassroom extends Component {
             );
         }
 
-        let classroomElements = null;
-
-        if (this.props.currentClassroom) {
-            classroomElements = (
-                <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Students</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>BJ Pennington</td>
-                                <td><button>Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>De'Anthony Miller</td>
-                                <td><button>Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>Peter Johnson</td>
-                                <td><button>Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>Tyler Sehr</td>
-                                <td><button>Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>Dane Smith</td>
-                                <td><button>Delete</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br />
-                    <br />
-                    <h3>Standards for:</h3>
-                    <div>
-                        <ul>
-                            <li>Use appropriate safety <button>X</button></li>
-                            <li>Conversion of units <button>X</button></li>
-                            <li>Identify engineered system <button>X</button></li>
-                            <li>Recognize design risks <button>X</button></li>
-                            <li>Identify evidence of physical changes <button>X</button></li>
-                            <li>Measure and calculate speed <button>X</button></li>
-                        </ul>
-                    </div>
-                </div>
-            )
-        }
-
         return (
             <div>
                 <Nav />
                 {content}
+                <AddStudent />
+                <AddStandard />
             </div>
         )
     }
