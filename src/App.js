@@ -42,7 +42,7 @@ const App = () => (
           component={Classrooms}
         />
         <Route
-          path="/assignments"
+          path="/assignments/:id"
           component={Assignments}
         />
         <Route
@@ -54,7 +54,7 @@ const App = () => (
           component={ManageClassroom}
         />
         <Route
-          path="/scores"
+          path="/scores/:id"
           component={ScoresTable}
         />
         {/* OTHERWISE (no path!) */}
