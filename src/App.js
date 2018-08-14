@@ -59,7 +59,6 @@ const App = () => (
         />
         {/* OTHERWISE (no path!) */}
         <Route component={NotFound} />
-
       </Switch>
     </Router>
   </div>

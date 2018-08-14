@@ -24,7 +24,7 @@ class Classrooms extends Component {
                 <div>
                     <p>
                         Classrooms
-            </p>
+                    </p>
                 </div>
             );
         }
