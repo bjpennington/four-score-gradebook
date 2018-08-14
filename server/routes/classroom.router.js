@@ -31,6 +31,19 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+    console.log('new classroom post req.body:', req.body, 'new classroom req.user:', req.user);
+    queryText = `INSERT INTO "classrooms" ("classroom_name", "person_id") VALUES ($1, $2);`
+    pool.query(queryText, [req.body.classroom_name, req.user.id])
+        .then(response => {
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log('Error on /api/classroom POST:', error);
+            res.sendStatus(500);
+        });
+})
+
 router.get('/assignments/:id', rejectUnauthenticated, (req, res) => {
     console.log('/assignments req.body:', req.body, '/assignments req.user:', req.user, 'assignment req.params:', req.params);
     queryText = `SELECT * FROM "assignments" WHERE "classroom_id" = $1;`

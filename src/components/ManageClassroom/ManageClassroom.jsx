@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import {CLASSROOM_ACTIONS} from '../../redux/actions/classroomActions';
 
 import Nav from '../Nav/Nav';
 
@@ -30,6 +31,18 @@ class ManageClassroom extends Component {
         }
     }
 
+    handleCreateClassroom = (event) => {
+        event.preventDefault();
+        console.log('classroom created:', this.state);
+        this.props.dispatch({
+            type: CLASSROOM_ACTIONS.CREATE_CLASSROOM,
+            payload: this.state
+        });
+        this.setState({
+            classroom_name: ''
+        })
+    }
+
     render() {
 
         console.log(this.state.classroom_name);
@@ -39,13 +52,16 @@ class ManageClassroom extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
-                    <form action="">
+                    <form onSubmit={this.handleCreateClassroom}>
                         <input
                             type="text"
                             placeholder="Classroom Name"
                             value={this.state.classroom_name}
                             onChange={this.handleChangeFor('classroom_name')}
                         />
+                        <button type="submit">
+                            Create Classroom
+                        </button>
                     </form>
                 </div>
             );
