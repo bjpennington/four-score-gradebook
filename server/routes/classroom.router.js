@@ -19,7 +19,16 @@ const sampleAssignments = [
 ]
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    res.send(sampleClassrooms);
+    console.log('classroom req.body:', req.body, 'classroom req.user:', req.user);
+    queryText = `SELECT * FROM "classrooms" WHERE "person_id" = $1;`
+    pool.query(queryText, [req.user.id])
+        .then(response => {
+            res.send(response.rows)
+        })
+        .catch(error => {
+            console.log('Error on /api/classroom GET:', error)
+            res.sendStatus(500);
+        });
 });
 
 router.get('/assignments', rejectUnauthenticated, (req, res) => {
