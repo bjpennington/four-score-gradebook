@@ -9,12 +9,17 @@ import AddStudent from '../AddStudent/AddStudent';
 import AddStandard from '../AddStandard/AddStandard';
 
 class ManageClassroom extends Component {
+
+    defaultState = {
+        classroom_name: '',
+        id: this.props.currentClassroom.id,
+    }
+
     constructor(props) {
         super(props);
-        this.state = {
-            classroom_name: '',
-        }
+        this.state = this.defaultState
     }
+
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
     }
@@ -28,21 +33,22 @@ class ManageClassroom extends Component {
     handleChangeFor = (propertyName) => {
         return (event) => {
             this.setState({
+                ...this.state,
                 [propertyName]: event.target.value
             })
         }
     }
 
-    handleCreateClassroom = (event) => {
+    updateClassroomName = (event) => {
         event.preventDefault();
         console.log('classroom created:', this.state);
         this.props.dispatch({
-            type: CLASSROOM_ACTIONS.CREATE_CLASSROOM,
+            type: CLASSROOM_ACTIONS.EDIT_CLASSROOM,
             payload: this.state
         });
-        this.setState({
-            classroom_name: ''
-        })
+        this.setState(
+            this.defaultState
+        )
     }
 
     render() {
@@ -56,16 +62,17 @@ class ManageClassroom extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
-                    <form onSubmit={this.handleCreateClassroom}>
+                    {JSON.stringify(this.props.currentClassroom)}
+                    <form onSubmit={this.updateClassroomName}>
                         <input
                             type="text"
                             placeholder="Classroom Name"
                             value={this.state.classroom_name}
                             onChange={this.handleChangeFor('classroom_name')}
                         />
-                        {/* <button type="submit">
-                            Create Classroom
-                        </button> */}
+                        <button type="submit">
+                            Save Name
+                        </button>
                     </form>
 
                 </div>
@@ -85,6 +92,7 @@ class ManageClassroom extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
+    currentClassroom: state.classroom.currentClassroom
 });
 
 export default connect(mapStateToProps)(ManageClassroom);

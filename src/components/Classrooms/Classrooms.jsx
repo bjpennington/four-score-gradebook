@@ -18,7 +18,7 @@ class Classrooms extends Component {
             this.props.history.push('/home');
         }
         else if (this.props.currentClassroom) {
-            this.props.history.push(`/manage_classroom/${this.props.currentClassroom}`);
+            this.props.history.push(`/manage_classroom/${this.props.currentClassroom.id}`);
         }
     }
 

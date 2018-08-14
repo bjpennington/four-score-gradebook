@@ -31,9 +31,19 @@ function* postClassroom(action) {
     }
 }
 
+function* editClassroom(action) {
+    try {
+        yield call(axios.put, '/api/classroom', action.payload);
+    }
+    catch (error) {
+        console.log('Error on classroomSaga editClassroom:', error);
+    }
+}
+
 function* classroomSaga() {
     yield takeLatest(CLASSROOM_ACTIONS.FETCH_CLASSROOMS, fetchClassrooms);
     yield takeLatest(CLASSROOM_ACTIONS.CREATE_CLASSROOM, postClassroom);
+    yield takeLatest(CLASSROOM_ACTIONS.EDIT_CLASSROOM, editClassroom);
 }
 
 export default classroomSaga;
