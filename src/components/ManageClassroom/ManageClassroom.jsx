@@ -46,6 +46,8 @@ class ManageClassroom extends Component {
     render() {
 
         console.log(this.state.classroom_name);
+        console.log('current classroom:', this.props);
+        
 
         let content = null;
 
@@ -59,9 +61,9 @@ class ManageClassroom extends Component {
                             value={this.state.classroom_name}
                             onChange={this.handleChangeFor('classroom_name')}
                         />
-                        <button type="submit">
+                        {/* <button type="submit">
                             Create Classroom
-                        </button>
+                        </button> */}
                     </form>
 
                 </div>
@@ -124,7 +126,6 @@ class ManageClassroom extends Component {
             <div>
                 <Nav />
                 {content}
-                {classroomElements}
             </div>
         )
     }
@@ -132,7 +133,6 @@ class ManageClassroom extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
-    currentClassroom: state.currentClassroom,
 });
 
 export default connect(mapStateToProps)(ManageClassroom);

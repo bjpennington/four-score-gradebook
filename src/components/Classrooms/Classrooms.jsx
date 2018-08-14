@@ -17,6 +17,16 @@ class Classrooms extends Component {
         if (!this.props.user.isLoading && this.props.user.userName === null) {
             this.props.history.push('/home');
         }
+        else if (this.props.currentClassroom) {
+            this.props.history.push(`/manage_classroom/${this.props.currentClassroom}`);
+        }
+    }
+
+    handeCreateClassroom = () => {
+        this.props.dispatch({
+            type: CLASSROOM_ACTIONS.CREATE_CLASSROOM,
+            payload: ''
+        });
     }
 
     render() {
@@ -33,7 +43,7 @@ class Classrooms extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
-                    <button onClick={() => this.props.history.push('/manage_classroom')}>
+                    <button onClick={this.handeCreateClassroom}>
                         Create New Classroom
                     </button>
                     <table>
@@ -62,7 +72,8 @@ class Classrooms extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
-    classrooms: state.classroom.classrooms
+    classrooms: state.classroom.classrooms,
+    currentClassroom: state.classroom.currentClassroom
 });
 
 export default connect(mapStateToProps)(Classrooms);
