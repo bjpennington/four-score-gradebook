@@ -11,12 +11,17 @@ import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
 import InfoPage from './components/InfoPage/InfoPage';
+import Classrooms from './components/Classrooms/Classrooms';
+import Assignments from './components/Assignments/Assignments';
+import GradeAssignment from './components/GradeAssignment/GradeAssignment';
+import ManageClassroom from './components/ManageClassroom/ManageClassroom';
+import ScoresTable from './components/ScoresTable/ScoresTable';
 
 import './styles/main.css';
 
 const App = () => (
   <div>
-    <Header title="Project Base" />
+    <Header title="FourScore" />
     <Router>
       <Switch>
         <Redirect exact from="/" to="/home" />
@@ -35,6 +40,26 @@ const App = () => (
         <Route
           path="/info"
           component={InfoPage}
+        />
+        <Route
+          path="/classrooms"
+          component={Classrooms}
+        />
+        <Route
+          path="/assignments"
+          component={Assignments}
+        />
+        <Route
+          path="/grade"
+          component={GradeAssignment}
+        />
+        <Route
+          path="/manage_classroom"
+          component={ManageClassroom}
+        />
+        <Route
+          path="/scores"
+          component={ScoresTable}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />
