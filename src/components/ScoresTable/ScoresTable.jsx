@@ -1,15 +1,45 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { USER_ACTIONS } from '../../redux/actions/userActions';
+
 import Nav from '../Nav/Nav';
 
 class ScoresTable extends Component {
+    componentDidMount() {
+        this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    }
+
+    componentDidUpdate() {
+        if (!this.props.user.isLoading && this.props.user.userName === null) {
+            this.props.history.push('home');
+        }
+    }
+
     render() {
-        return(
+        let content = null;
+
+        if (this.props.user.userName) {
+            content = (
+                <div>
+                    <p>
+                        Scores Table
+            </p>
+                </div>
+            );
+        }
+
+        return (
             <div>
                 <Nav />
-                <p>Scores Table</p>
+                {content}
             </div>
         )
     }
 }
 
-export default ScoresTable;
+const mapStateToProps = state => ({
+    user: state.user,
+});
+
+export default connect(mapStateToProps)(ScoresTable);

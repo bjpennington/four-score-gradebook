@@ -10,7 +10,6 @@ import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
-import InfoPage from './components/InfoPage/InfoPage';
 import Classrooms from './components/Classrooms/Classrooms';
 import Assignments from './components/Assignments/Assignments';
 import GradeAssignment from './components/GradeAssignment/GradeAssignment';
@@ -36,10 +35,6 @@ const App = () => (
         <Route
           path="/user"
           component={UserPage}
-        />
-        <Route
-          path="/info"
-          component={InfoPage}
         />
         <Route
           path="/classrooms"
