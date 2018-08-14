@@ -33,6 +33,7 @@ class Assignments extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
+                    <button onClick={() => {this.props.history.push(`/scores/${this.props.match.params.id}`)}}>Back to Classroom</button>
                     <button onClick={() => alert('Add assignment modal pops up here')}>
                         Add Assignment
                     </button>

@@ -2,7 +2,7 @@ import { put as dispatch, takeLatest, takeEvery, call } from 'redux-saga/effects
 import {CLASSROOM_ACTIONS} from '../actions/classroomActions';
 import axios from 'axios';
 
-function* fetchClassrooms() {
+function* fetchClassrooms(action) {
     try {
         const classrooms = yield call(axios.get, '/api/classroom');
         console.log(classrooms.data);

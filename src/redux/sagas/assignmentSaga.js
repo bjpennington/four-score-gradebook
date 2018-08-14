@@ -2,9 +2,10 @@ import { put as dispatch, takeLatest, takeEvery, call } from 'redux-saga/effects
 import {ASSIGNMENT_ACTIONS} from '../actions/assignmentActions';
 import axios from 'axios';
 
-function* fetchAssignments() {
+function* fetchAssignments(action) {
     try {
-        const assignments = yield call(axios.get, '/api/classroom/assignments');
+        console.log('assignments payload:', action.payload)
+        const assignments = yield call(axios.get, `/api/classroom/assignments/${action.payload}`);
         console.log(assignments.data);
         yield dispatch({
             type: ASSIGNMENT_ACTIONS.SET_ASSIGNMENTS,
