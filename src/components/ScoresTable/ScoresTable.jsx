@@ -16,7 +16,18 @@ class ScoresTable extends Component {
         }
     }
 
+    editClassroom = () => {
+        this.props.history.push(`/manage_classroom/${this.props.match.params.id}`)
+    }
+
+    goToAssignments = () => {
+        this.props.history.push(`/assignments/${this.props.match.params.id}`)
+    }
+
     render() {
+        console.log('scores props:', this.props.match);
+        
+
         let content = null;
 
         if (this.props.user.userName) {
@@ -24,7 +35,13 @@ class ScoresTable extends Component {
                 <div>
                     <p>
                         Scores Table
-            </p>
+                    </p>
+                    <button onClick={this.editClassroom}>
+                        Edit Classroom
+                    </button>
+                    <button onClick={this.goToAssignments}>
+                        Assignments
+                    </button>
                 </div>
             );
         }
