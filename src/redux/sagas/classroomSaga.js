@@ -6,6 +6,10 @@ function* fetchClassrooms() {
     try {
         const classrooms = yield call(axios.get, '/api/classroom');
         console.log(classrooms.data);
+        yield dispatch({
+            type: CLASSROOM_ACTIONS.SET_CLASSROOMS,
+            payload: classrooms.data
+        })
     }
     catch (error) {
         console.log('Error on classroomSaga fetchClassrooms:', error); 

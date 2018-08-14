@@ -27,6 +27,8 @@ class Classrooms extends Component {
                     <p>
                         Classrooms
                     </p>
+                    {JSON.stringify(this.props.classrooms)}
+
                 </div>
             );
         }
@@ -42,6 +44,7 @@ class Classrooms extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
+    classrooms: state.classroom.classrooms
 });
 
 export default connect(mapStateToProps)(Classrooms);
