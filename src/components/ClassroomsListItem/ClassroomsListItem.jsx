@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 
 class ClassroomsListItem extends Component {
 
@@ -12,7 +12,7 @@ class ClassroomsListItem extends Component {
         console.log('classroom:', this.props);
         return (
             <tr>
-                <td>{this.props.classroom.classroom_name}</td>
+                <td><Link to={`/scores/${this.props.classroom.id}`}>{this.props.classroom.classroom_name}</Link></td>
                 <td><button onClick={this.editClassroom}>Edit</button></td>
             </tr>
         )
