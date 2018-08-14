@@ -15,6 +15,7 @@ import Assignments from './components/Assignments/Assignments';
 import GradeAssignment from './components/GradeAssignment/GradeAssignment';
 import ManageClassroom from './components/ManageClassroom/ManageClassroom';
 import ScoresTable from './components/ScoresTable/ScoresTable';
+import NotFound from './components/NotFound/NotFound';
 
 import './styles/main.css';
 
@@ -57,7 +58,7 @@ const App = () => (
           component={ScoresTable}
         />
         {/* OTHERWISE (no path!) */}
-        <Route render={() => <h1>404</h1>} />
+        <Route component={NotFound} />
 
       </Switch>
     </Router>
