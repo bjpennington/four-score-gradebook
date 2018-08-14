@@ -3,6 +3,7 @@ import userSaga from './userSaga';
 import loginSaga from './loginSaga';
 import classroomSaga from './classroomSaga';
 import assignmentSaga from './assignmentSaga';
+import studentSaga from './studentSaga';
 
 
 export default function* rootSaga() {
@@ -11,6 +12,7 @@ export default function* rootSaga() {
     loginSaga(),
     classroomSaga(),
     assignmentSaga(),
+    studentSaga(),
     // watchIncrementAsync()
   ]);
 }
