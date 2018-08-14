@@ -33,10 +33,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('new classroom post req.body:', req.body, 'new classroom req.user:', req.user);
-    queryText = `INSERT INTO "classrooms" ("classroom_name", "person_id") VALUES ($1, $2);`
+    queryText = `INSERT INTO "classrooms" ("classroom_name", "person_id") VALUES ($1, $2) RETURNING "id";`
     pool.query(queryText, [req.body.classroom_name, req.user.id])
         .then(response => {
-            res.sendStatus(201);
+            console.log(response);
+            res.send(response.rows[0]);
         })
         .catch(error => {
             console.log('Error on /api/classroom POST:', error);

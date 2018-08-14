@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import {CLASSROOM_ACTIONS} from '../../redux/actions/classroomActions';
+import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 
 import Nav from '../Nav/Nav';
 
@@ -63,6 +63,16 @@ class ManageClassroom extends Component {
                             Create Classroom
                         </button>
                     </form>
+
+                </div>
+            );
+        }
+
+        let classroomElements = null;
+
+        if (this.props.currentClassroom) {
+            classroomElements = (
+                <div>
                     <table>
                         <thead>
                             <tr>
@@ -93,8 +103,8 @@ class ManageClassroom extends Component {
                             </tr>
                         </tbody>
                     </table>
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
                     <h3>Standards for:</h3>
                     <div>
                         <ul>
@@ -107,13 +117,14 @@ class ManageClassroom extends Component {
                         </ul>
                     </div>
                 </div>
-            );
+            )
         }
 
         return (
             <div>
                 <Nav />
                 {content}
+                {classroomElements}
             </div>
         )
     }
@@ -121,6 +132,7 @@ class ManageClassroom extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
+    currentClassroom: state.currentClassroom,
 });
 
 export default connect(mapStateToProps)(ManageClassroom);
