@@ -63,6 +63,49 @@ class ManageClassroom extends Component {
                             Create Classroom
                         </button>
                     </form>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Students</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BJ Pennington</td>
+                                <td><button>Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>De'Anthony Miller</td>
+                                <td><button>Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>Peter Johnson</td>
+                                <td><button>Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>Tyler Sehr</td>
+                                <td><button>Delete</button></td>
+                            </tr>
+                            <tr>
+                                <td>Dane Smith</td>
+                                <td><button>Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <br/>
+                    <h3>Standards for:</h3>
+                    <div>
+                        <ul>
+                            <li>Use appropriate safety <button>X</button></li>
+                            <li>Conversion of units <button>X</button></li>
+                            <li>Identify engineered system <button>X</button></li>
+                            <li>Recognize design risks <button>X</button></li>
+                            <li>Identify evidence of physical changes <button>X</button></li>
+                            <li>Measure and calculate speed <button>X</button></li>
+                        </ul>
+                    </div>
                 </div>
             );
         }
