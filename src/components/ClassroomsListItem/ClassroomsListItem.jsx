@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
 
 class ClassroomsListItem extends Component {
 
     editClassroom = () => {
-        this.props.push.history('/manage_classroom')
+        this.props.history.push(`/manage_classroom/${this.props.classroom.id}`)
     }
 
     render() {
+        console.log('classroom:', this.props);
         return (
             <tr>
                 <td>{this.props.classroom.classroom_name}</td>

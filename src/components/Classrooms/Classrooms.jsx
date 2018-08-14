@@ -20,6 +20,7 @@ class Classrooms extends Component {
     }
 
     render() {
+        console.log(this.props)
 
         let classroomMapArray = this.props.classrooms.map((classroom, index) => {
             return (
