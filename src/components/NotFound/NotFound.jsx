@@ -5,15 +5,9 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 import Nav from '../Nav/Nav';
 
-class Classrooms extends Component {
+class Assignments extends Component {
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    }
-
-    componentDidUpdate() {
-        if (!this.props.user.isLoading && this.props.user.userName === null) {
-            this.props.history.push('home');
-        }
     }
 
     render() {
@@ -22,16 +16,22 @@ class Classrooms extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
-                    <p>
-                        Classrooms
-            </p>
+                    <Nav />
+                    <h1>404</h1>
                 </div>
             );
+        }
+        else {
+            content = (
+                <div>
+                    <h1>404</h1>
+                    <p>Looks like you might be lost. <span><a href="/home">Login first?</a></span></p>
+                </div>
+            )
         }
 
         return (
             <div>
-                <Nav />
                 {content}
             </div>
         )
@@ -42,4 +42,4 @@ const mapStateToProps = state => ({
     user: state.user,
 });
 
-export default connect(mapStateToProps)(Classrooms);
+export default connect(mapStateToProps)(Assignments);

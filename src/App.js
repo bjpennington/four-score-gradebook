@@ -10,12 +10,12 @@ import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
-import InfoPage from './components/InfoPage/InfoPage';
 import Classrooms from './components/Classrooms/Classrooms';
 import Assignments from './components/Assignments/Assignments';
 import GradeAssignment from './components/GradeAssignment/GradeAssignment';
 import ManageClassroom from './components/ManageClassroom/ManageClassroom';
 import ScoresTable from './components/ScoresTable/ScoresTable';
+import NotFound from './components/NotFound/NotFound';
 
 import './styles/main.css';
 
@@ -38,10 +38,6 @@ const App = () => (
           component={UserPage}
         />
         <Route
-          path="/info"
-          component={InfoPage}
-        />
-        <Route
           path="/classrooms"
           component={Classrooms}
         />
@@ -62,7 +58,7 @@ const App = () => (
           component={ScoresTable}
         />
         {/* OTHERWISE (no path!) */}
-        <Route render={() => <h1>404</h1>} />
+        <Route component={NotFound} />
 
       </Switch>
     </Router>

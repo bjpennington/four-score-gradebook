@@ -36,7 +36,7 @@ class UserPage extends Component {
           <h1
             id="welcome"
           >
-            Welcome, { this.props.user.userName }!
+            Welcome, {this.props.user.userName}!
           </h1>
           <p>Your ID is: {this.props.user.id}</p>
           <button
@@ -51,7 +51,7 @@ class UserPage extends Component {
     return (
       <div>
         <Nav />
-        { content }
+        {content}
       </div>
     );
   }
