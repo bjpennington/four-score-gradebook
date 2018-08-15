@@ -58,7 +58,6 @@ class ManageClassroom extends Component {
     }
 
     render() {
-        console.log('MANAGE CLASSROOM PROPS:', this.props);
         
 
         let content = null;
@@ -75,7 +74,7 @@ class ManageClassroom extends Component {
                             onChange={this.handleChangeFor('classroom_name')}
                         />
                         <button type="submit">
-                            Save Name
+                            Update Name
                         </button>
                     </form>
                     <AddStudent />
