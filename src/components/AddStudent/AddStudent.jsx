@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import StudentListItem from '../StudentListItem/StudentListItem';
 
 class AddStudent extends Component {
 
@@ -46,10 +47,7 @@ class AddStudent extends Component {
 
         let studentsMapArray = this.props.classroomStudents.map((student, index) => {
             return (
-                <tr key={index}>
-                    <td>{student.student_name}</td>
-                    <td><button>Delete</button></td>
-                </tr>
+                <StudentListItem key={index} student={student} />
             )
         })
 
