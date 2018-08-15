@@ -21,7 +21,7 @@ class AddStandard extends Component {
             payload: this.props.match.params.id,
         });
     }
-    
+
 
     handleChangeFor = (propertyName) => {
         return (event) => {
@@ -52,7 +52,6 @@ class AddStandard extends Component {
             )
         })
 
-        console.log('addStandard props:', this.props)
         return (
             <div>
                 {JSON.stringify(this.props.classroomStandards)}

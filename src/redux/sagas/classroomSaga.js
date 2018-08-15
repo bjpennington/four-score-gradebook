@@ -2,7 +2,7 @@ import { put as dispatch, takeLatest, call } from 'redux-saga/effects';
 import {CLASSROOM_ACTIONS} from '../actions/classroomActions';
 import axios from 'axios';
 
-function* fetchClassrooms(action) {
+function* fetchClassrooms() {
     try {
         const classrooms = yield call(axios.get, '/api/classroom');
         console.log(classrooms.data);
@@ -21,10 +21,11 @@ function* postClassroom(action) {
         const newClassroom = yield call(axios.post, '/api/classroom', action.payload);
         console.log('newClassroom id?', newClassroom.data);
         
-        yield dispatch({
-            type: CLASSROOM_ACTIONS.SET_CURRENT_CLASSROOM,
-            payload: newClassroom.data
-        })
+        // yield dispatch({
+        //     type: CLASSROOM_ACTIONS.SET_CURRENT_CLASSROOM,
+        //     payload: newClassroom.data
+        // })
+        yield fetchClassrooms();
     }
     catch (error) {
         console.log('Error on classroomSaga postClassroom:', error);

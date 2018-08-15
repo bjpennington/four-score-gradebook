@@ -22,9 +22,10 @@ class Classrooms extends Component {
     handeCreateClassroom = () => {
         this.props.dispatch({
             type: CLASSROOM_ACTIONS.CREATE_CLASSROOM,
-            payload: ''
+            payload: {classroom_name: 'New Classroom'}
         });
     }
+
 
     render() {
         console.log(this.props)

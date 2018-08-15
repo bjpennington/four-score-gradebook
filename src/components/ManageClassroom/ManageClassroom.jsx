@@ -58,8 +58,6 @@ class ManageClassroom extends Component {
     }
 
     render() {
-
-        console.log('current classroom:', this.props);
         
 
         let content = null;
@@ -81,7 +79,7 @@ class ManageClassroom extends Component {
                     </form>
                     <AddStudent />
                 <AddStandard />
-                <button onClick={() => {this.props.history.push(`/scores/${this.props.currentClassroom.id}`)}}>View Classroom</button>
+                <button onClick={() => {this.props.history.push(`/scores/${this.props.currentClassroom}`)}}>View Classroom</button>
 
                 </div>
             );
