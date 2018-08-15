@@ -27,6 +27,18 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
             console.log('Error on /api/student GET:', error)
             res.sendStatus(500);
         });
-})
+});
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    queryText = `DELETE FROM "students" WHERE "id" = $1 RETURNING "classroom_id";`;
+    pool.query(queryText, [req.params.id])
+        .then(response => {
+            res.send(response.rows[0]);
+        })
+        .catch(error => {
+            console.log('Error on /api/student DELETE:', error);
+            res.sendStatus(500);
+        });
+});
 
 module.exports = router;
