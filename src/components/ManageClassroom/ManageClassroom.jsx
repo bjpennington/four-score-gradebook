@@ -76,6 +76,9 @@ class ManageClassroom extends Component {
                             Save Name
                         </button>
                     </form>
+                    <AddStudent />
+                <AddStandard />
+                <button onClick={() => {this.props.history.push(`/scores/${this.props.currentClassroom.id}`)}}>View Classroom</button>
 
                 </div>
             );
@@ -85,8 +88,6 @@ class ManageClassroom extends Component {
             <div>
                 <Nav />
                 {content}
-                <AddStudent />
-                <AddStandard />
             </div>
         )
     }
