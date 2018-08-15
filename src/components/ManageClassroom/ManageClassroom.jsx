@@ -25,7 +25,7 @@ class ManageClassroom extends Component {
             type: USER_ACTIONS.FETCH_USER,
         });
         this.props.dispatch({
-            type: CLASSROOM_ACTIONS.SET_CURRENT_CLASSROOM,
+            type: CLASSROOM_ACTIONS.FETCH_CURRENT_CLASSROOM,
             payload: this.props.match.params.id,
         });
     }
@@ -58,6 +58,7 @@ class ManageClassroom extends Component {
     }
 
     render() {
+        console.log('MANAGE CLASSROOM PROPS:', this.props);
         
 
         let content = null;
@@ -79,7 +80,7 @@ class ManageClassroom extends Component {
                     </form>
                     <AddStudent />
                 <AddStandard />
-                <button onClick={() => {this.props.history.push(`/scores/${this.props.currentClassroom}`)}}>View Classroom</button>
+                <button onClick={() => {this.props.history.push(`/scores/${this.props.currentClassroom.id}`)}}>View Classroom</button>
 
                 </div>
             );

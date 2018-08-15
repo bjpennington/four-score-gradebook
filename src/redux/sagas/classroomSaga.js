@@ -16,15 +16,24 @@ function* fetchClassrooms() {
     }
 }
 
+function* fetchCurrentClassroom(action) {
+    try {
+      const currentClassroom = yield call(axios.get, `/api/classroom/${action.payload}`);
+      console.log('CURRENTCLASSROOM SAGA RETURN:', currentClassroom.data)
+      yield dispatch({
+          type: CLASSROOM_ACTIONS.SET_CURRENT_CLASSROOM,
+          payload: currentClassroom.data[0],
+      });
+    }
+    catch (error) {
+        console.log('Error on classroomSaga fetchCurrentClassroom:', error); 
+    }
+  }
+
 function* postClassroom(action) {
     try {
         const newClassroom = yield call(axios.post, '/api/classroom', action.payload);
         console.log('newClassroom id?', newClassroom.data);
-        
-        // yield dispatch({
-        //     type: CLASSROOM_ACTIONS.SET_CURRENT_CLASSROOM,
-        //     payload: newClassroom.data
-        // })
         yield fetchClassrooms();
     }
     catch (error) {
@@ -35,6 +44,7 @@ function* postClassroom(action) {
 function* editClassroom(action) {
     try {
         const updatedClassroom = yield call(axios.put, '/api/classroom', action.payload);
+        
         yield dispatch({
             type: CLASSROOM_ACTIONS.SET_CURRENT_CLASSROOM,
             payload: updatedClassroom.data
@@ -49,6 +59,7 @@ function* classroomSaga() {
     yield takeLatest(CLASSROOM_ACTIONS.FETCH_CLASSROOMS, fetchClassrooms);
     yield takeLatest(CLASSROOM_ACTIONS.CREATE_CLASSROOM, postClassroom);
     yield takeLatest(CLASSROOM_ACTIONS.EDIT_CLASSROOM, editClassroom);
+    yield takeLatest(CLASSROOM_ACTIONS.FETCH_CURRENT_CLASSROOM, fetchCurrentClassroom);
 }
 
 export default classroomSaga;

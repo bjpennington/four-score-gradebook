@@ -51,7 +51,6 @@ class AddStudent extends Component {
             )
         })
 
-        console.log('addStudent props:', this.props)
         return (
             <div>
                 {JSON.stringify(this.props.classroomStudents)}
@@ -84,7 +83,6 @@ class AddStudent extends Component {
 
 const mapStateToProps = (state) => {
     return({
-        currentClassroom: state.classroom.currentClassroom,
         classroomStudents: state.student.students,
     })
 }

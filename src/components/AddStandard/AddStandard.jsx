@@ -76,7 +76,6 @@ class AddStandard extends Component {
 
 const mapStateToProps = (state) => {
     return ({
-        currentClassroom: state.classroom.currentClassroom,
         classroomStandards: state.standard.standards,
     })
 }

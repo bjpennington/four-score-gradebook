@@ -34,10 +34,6 @@ const App = () => (
           component={RegisterPage}
         />
         <Route
-          path="/user"
-          component={UserPage}
-        />
-        <Route
           path="/classrooms"
           component={Classrooms}
         />

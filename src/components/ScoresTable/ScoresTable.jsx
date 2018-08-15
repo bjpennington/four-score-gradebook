@@ -8,6 +8,10 @@ import Nav from '../Nav/Nav';
 class ScoresTable extends Component {
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        this.props.dispatch({
+            type: CLASSROOM_ACTIONS.FETCH_CURRENT_CLASSROOM,
+            payload: this.props.match.params.id,
+        });
     }
 
     componentDidUpdate() {
