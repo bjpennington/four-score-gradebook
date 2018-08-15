@@ -5,6 +5,7 @@ import classroom from './classroomReducer';
 import assignment from './assignmentReducer';
 import student from './studentReducer';
 import standard from './standardReducer';
+import score from './scoreReducer';
 
 const store = combineReducers({
   user,
@@ -13,6 +14,7 @@ const store = combineReducers({
   assignment,
   student,
   standard,
+  score,
 });
 
 export default store;

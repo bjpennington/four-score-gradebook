@@ -36,5 +36,6 @@ CREATE TABLE "scores" (
 	"student_id" INTEGER REFERENCES "students",
 	"assignment_id" INTEGER REFERENCES "assignments",
 	"standard_id" INTEGER REFERENCES "standards",
+	"classroom_id" INTEGER REFERENCES "classrooms",
 	"score" INTEGER NOT NULL DEFAULT 0
 );
