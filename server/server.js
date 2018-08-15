@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const classroomRouter = require('./routes/classroom.router');
 const studentRouter = require('./routes/student.router');
 const standardRouter = require('./routes/standard.router');
+const scoreRouter = require('./routes/score.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/api/classroom', classroomRouter);
 app.use('/api/student', studentRouter);
 app.use('/api/standard', standardRouter);
+app.use('/api/score', scoreRouter);
 
 // Serve static files
 app.use(express.static('build'));

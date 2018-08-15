@@ -5,6 +5,7 @@ import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
 import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
+import {SCORE_ACTIONS} from '../../redux/actions/scoreActions';
 
 import Nav from '../Nav/Nav';
 
@@ -21,6 +22,10 @@ class ScoresTable extends Component {
         });
         this.props.dispatch({
             type: STUDENT_ACTIONS.FETCH_STUDENT,
+            payload: this.props.match.params.id,
+        });
+        this.props.dispatch({
+            type: SCORE_ACTIONS.FETCH_SCORE,
             payload: this.props.match.params.id,
         });
     }
@@ -63,6 +68,7 @@ class ScoresTable extends Component {
                 <div>
                     {JSON.stringify(this.props.standards)}
                     {JSON.stringify(this.props.students)}
+                    {JSON.stringify(this.props.scores)}
                     <h3>{this.props.currentClassroom.classroom_name}</h3>
                     <p>
                         Scores Table
@@ -102,6 +108,7 @@ const mapStateToProps = state => ({
     currentClassroom: state.classroom.currentClassroom,
     standards: state.standard.standards,
     students: state.student.students,
+    scores: state.score.scores,
 });
 
 export default connect(mapStateToProps)(ScoresTable);
