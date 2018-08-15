@@ -14,6 +14,13 @@ class AddStudent extends Component {
         this.state = this.defaultState
     }
 
+    componentDidMount() {
+        this.props.dispatch({
+            type: STUDENT_ACTIONS.FETCH_STUDENT,
+            payload: this.props.currentClassroom.id,
+        });
+    }
+
     handleChangeFor = (propertyName) => {
         return (event) => {
             this.setState({
@@ -39,6 +46,7 @@ class AddStudent extends Component {
         console.log('addStudent props:', this.props)
         return (
             <div>
+                {JSON.stringify(this.props.classroomStudents)}
                 <form onSubmit={this.addStudent}>
                     <input
                         type="text"
@@ -87,7 +95,8 @@ class AddStudent extends Component {
 
 const mapStateToProps = (state) => {
     return({
-        currentClassroom: state.classroom.currentClassroom
+        currentClassroom: state.classroom.currentClassroom,
+        classroomStudents: state.student.students,
     })
 }
 
