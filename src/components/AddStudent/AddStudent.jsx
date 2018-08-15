@@ -43,6 +43,16 @@ class AddStudent extends Component {
     }
 
     render() {
+
+        let studentsMapArray = this.props.classroomStudents.map((student, index) => {
+            return (
+                <tr key={index}>
+                    <td>{student.student_name}</td>
+                    <td><button>Delete</button></td>
+                </tr>
+            )
+        })
+
         console.log('addStudent props:', this.props)
         return (
             <div>
@@ -66,26 +76,7 @@ class AddStudent extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>BJ Pennington</td>
-                            <td><button>Delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>De'Anthony Miller</td>
-                            <td><button>Delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>Peter Johnson</td>
-                            <td><button>Delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>Tyler Sehr</td>
-                            <td><button>Delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>Dane Smith</td>
-                            <td><button>Delete</button></td>
-                        </tr>
+                        {studentsMapArray}
                     </tbody>
                 </table>
             </div>
