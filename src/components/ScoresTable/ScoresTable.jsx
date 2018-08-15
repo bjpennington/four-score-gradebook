@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 import Nav from '../Nav/Nav';

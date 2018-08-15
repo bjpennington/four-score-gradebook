@@ -66,7 +66,7 @@ class ManageClassroom extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
-                    {JSON.stringify(this.props.currentClassroom)}
+                    <h3>Manage {this.props.currentClassroom.classroom_name}</h3>
                     <form onSubmit={this.updateClassroomName}>
                         <input
                             type="text"

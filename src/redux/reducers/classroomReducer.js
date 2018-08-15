@@ -10,7 +10,7 @@ const classrooms = (state = [], action) => {
     }
 }
 
-const currentClassroom = (state = null, action) => {
+const currentClassroom = (state = {id: '', classroom_name: '', person_id: ''}, action) => {
     switch (action.type) {
         case CLASSROOM_ACTIONS.SET_CURRENT_CLASSROOM:
             return action.payload || state;   

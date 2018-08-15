@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
 
 import Nav from '../Nav/Nav';

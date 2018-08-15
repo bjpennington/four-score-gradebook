@@ -65,7 +65,7 @@ class AddStandard extends Component {
                     <button type="submit">+</button>
                 </form>
 
-
+            <h4>Standards for {this.props.currentClassroom.classroom_name}:</h4>
                 <ul>
                     {standardsMapArray}
                 </ul>
@@ -77,6 +77,7 @@ class AddStandard extends Component {
 const mapStateToProps = (state) => {
     return ({
         classroomStandards: state.standard.standards,
+        currentClassroom: state.classroom.currentClassroom,
     })
 }
 
