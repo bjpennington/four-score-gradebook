@@ -15,7 +15,7 @@ class StudentListItem extends Component {
         return (
             <tr>
                 <td>{this.props.student.student_name}</td>
-                <td onClick={this.deleteStudent}><button>Delete</button></td>
+                <td><button onClick={this.deleteStudent}>Delete</button></td>
             </tr>
         )
     }

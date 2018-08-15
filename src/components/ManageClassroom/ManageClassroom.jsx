@@ -56,7 +56,6 @@ class ManageClassroom extends Component {
 
     render() {
 
-        console.log(this.state.classroom_name);
         console.log('current classroom:', this.props);
         
 
