@@ -31,6 +31,45 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+    console.log('new classroom post req.body:', req.body, 'new classroom req.user:', req.user);
+    queryText = `INSERT INTO "classrooms" ("classroom_name", "person_id") VALUES ($1, $2) RETURNING "id", "classroom_name";`
+    pool.query(queryText, [req.body.classroom_name, req.user.id])
+        .then(response => {
+            console.log(response);
+            res.send(response.rows[0]);
+        })
+        .catch(error => {
+            console.log('Error on /api/classroom POST:', error);
+            res.sendStatus(500);
+        });
+});
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log(' classroom to edit req.body:', req.body, 'classroom to edit req.user:', req.user);
+    queryText = `UPDATE "classrooms" SET "classroom_name" = $1 WHERE "id" = $2 RETURNING *;`
+    pool.query(queryText, [req.body.classroom_name, req.body.id])
+        .then(response => {
+            res.send(response.rows[0]);
+        })
+        .catch(error => {
+            console.log('Error on /api/classroom PUT:', error);
+            res.sendStatus(500);
+        });
+});
+
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    queryText = `SELECT * FROM "classrooms" where "id" = $1;`;
+    pool.query(queryText, [req.params.id])
+        .then(response => {
+            res.send(response.rows);
+        })
+        .catch(error => {
+            console.log('Error on /api/classrooms/:id GET:', error);
+            res.sendStatus(500);
+        });
+});
+
 router.get('/assignments/:id', rejectUnauthenticated, (req, res) => {
     console.log('/assignments req.body:', req.body, '/assignments req.user:', req.user, 'assignment req.params:', req.params);
     queryText = `SELECT * FROM "assignments" WHERE "classroom_id" = $1;`

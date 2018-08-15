@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {withRouter, Link} from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class ClassroomsListItem extends Component {
 
     editClassroom = () => {
-        this.props.history.push(`/manage_classroom/${this.props.classroom.id}`)
+        this.props.history.push(`/manage_classroom/${this.props.classroom.id}`);
     }
 
     render() {

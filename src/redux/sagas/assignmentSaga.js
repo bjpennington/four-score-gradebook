@@ -1,4 +1,4 @@
-import { put as dispatch, takeLatest, takeEvery, call } from 'redux-saga/effects';
+import { put as dispatch, takeLatest, call } from 'redux-saga/effects';
 import {ASSIGNMENT_ACTIONS} from '../actions/assignmentActions';
 import axios from 'axios';
 

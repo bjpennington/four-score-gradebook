@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import {ASSIGNMENT_ACTIONS} from '../actions/assignmentActions';
+import {STANDARD_ACTIONS} from '../actions/standardActions';
 
-const assignments = (state = [], action) => {
+const standards = (state = [], action) => {
     switch (action.type) {
-        case ASSIGNMENT_ACTIONS.SET_ASSIGNMENTS:
+        case STANDARD_ACTIONS.SET_STANDARDS:
             return action.payload || state;
         default:
             return state;
@@ -11,5 +11,5 @@ const assignments = (state = [], action) => {
 }
 
 export default combineReducers({
-    assignments,
+    standards,
 });

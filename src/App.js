@@ -9,7 +9,6 @@ import {
 import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
-import UserPage from './components/UserPage/UserPage';
 import Classrooms from './components/Classrooms/Classrooms';
 import Assignments from './components/Assignments/Assignments';
 import GradeAssignment from './components/GradeAssignment/GradeAssignment';
@@ -34,10 +33,6 @@ const App = () => (
           component={RegisterPage}
         />
         <Route
-          path="/user"
-          component={UserPage}
-        />
-        <Route
           path="/classrooms"
           component={Classrooms}
         />
@@ -50,7 +45,7 @@ const App = () => (
           component={GradeAssignment}
         />
         <Route
-          path="/manage_classroom"
+          path="/manage_classroom/:id"
           component={ManageClassroom}
         />
         <Route

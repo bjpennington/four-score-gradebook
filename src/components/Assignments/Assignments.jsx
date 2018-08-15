@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
 
 import Nav from '../Nav/Nav';
@@ -10,6 +11,10 @@ import AssignmentsListItem from '../AssignmentsListItem/AssignmentsListItem';
 class Assignments extends Component {
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        this.props.dispatch({
+            type: CLASSROOM_ACTIONS.FETCH_CURRENT_CLASSROOM,
+            payload: this.props.match.params.id,
+        });
         this.props.dispatch({type: ASSIGNMENT_ACTIONS.FETCH_ASSIGNMENTS, payload: this.props.match.params.id})
     }
 

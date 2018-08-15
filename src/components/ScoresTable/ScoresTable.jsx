@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 import Nav from '../Nav/Nav';
@@ -8,6 +9,10 @@ import Nav from '../Nav/Nav';
 class ScoresTable extends Component {
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+        this.props.dispatch({
+            type: CLASSROOM_ACTIONS.FETCH_CURRENT_CLASSROOM,
+            payload: this.props.match.params.id,
+        });
     }
 
     componentDidUpdate() {
