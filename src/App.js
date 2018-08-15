@@ -50,7 +50,7 @@ const App = () => (
           component={GradeAssignment}
         />
         <Route
-          path="/manage_classroom"
+          path="/manage_classroom/:id"
           component={ManageClassroom}
         />
         <Route

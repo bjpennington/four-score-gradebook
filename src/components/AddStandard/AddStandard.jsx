@@ -8,7 +8,7 @@ class AddStandard extends Component {
 
     defaultState = {
         newStandard: '',
-        classroom_id: this.props.currentClassroom.id
+        classroom_id: this.props.match.params.id,
     }
     constructor(props) {
         super(props);
@@ -18,9 +18,10 @@ class AddStandard extends Component {
     componentDidMount() {
         this.props.dispatch({
             type: STANDARD_ACTIONS.FETCH_STANDARD,
-            payload: this.props.currentClassroom.id,
+            payload: this.props.match.params.id,
         });
     }
+    
 
     handleChangeFor = (propertyName) => {
         return (event) => {

@@ -12,7 +12,7 @@ class ManageClassroom extends Component {
 
     defaultState = {
         classroom_name: '',
-        id: this.props.currentClassroom.id,
+        id: this.props.match.params.id,
     }
 
     constructor(props) {
@@ -23,7 +23,10 @@ class ManageClassroom extends Component {
     componentDidMount() {
         this.props.dispatch({
             type: USER_ACTIONS.FETCH_USER,
-            payload: this.props.currentClassroom.id
+        });
+        this.props.dispatch({
+            type: CLASSROOM_ACTIONS.SET_CURRENT_CLASSROOM,
+            payload: this.props.match.params.id,
         });
     }
 

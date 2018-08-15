@@ -17,9 +17,6 @@ class Classrooms extends Component {
         if (!this.props.user.isLoading && this.props.user.userName === null) {
             this.props.history.push('/home');
         }
-        else if (this.props.currentClassroom) {
-            this.props.history.push(`/manage_classroom/${this.props.currentClassroom.id}`);
-        }
     }
 
     handeCreateClassroom = () => {

@@ -8,7 +8,7 @@ class AddStudent extends Component {
 
     defaultState = {
         newStudent: '',
-        classroom_id: this.props.currentClassroom.id
+        classroom_id: this.props.match.params.id,
     }
     constructor(props) {
         super(props);
@@ -18,7 +18,7 @@ class AddStudent extends Component {
     componentDidMount() {
         this.props.dispatch({
             type: STUDENT_ACTIONS.FETCH_STUDENT,
-            payload: this.props.currentClassroom.id,
+            payload: this.props.match.params.id,
         });
     }
 
