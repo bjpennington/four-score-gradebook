@@ -8,6 +8,8 @@ import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
 import {SCORE_ACTIONS} from '../../redux/actions/scoreActions';
 
 import Nav from '../Nav/Nav';
+import ScoreCell from '../ScoreCell/ScoreCell';
+
 
 class ScoresTable extends Component {
     componentDidMount() {
@@ -56,9 +58,10 @@ class ScoresTable extends Component {
             return (
                 <tr key={index}>
                     <td>{student.student_name}</td>
+                    <ScoreCell key={index} student={student.id} />
                 </tr>
             )
-        })
+        });
 
         let content = null;
 
