@@ -79,3 +79,7 @@ li a:hover {
     text-decoration: underline;
     color: #eee;
 }
+
+table, th, td {
+    border: 1px solid black;
+ }

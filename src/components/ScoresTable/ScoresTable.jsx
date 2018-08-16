@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Griddle from 'griddle-react';
 
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -8,7 +9,7 @@ import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
 import {SCORE_ACTIONS} from '../../redux/actions/scoreActions';
 
 import Nav from '../Nav/Nav';
-import ScoreCell from '../ScoreCell/ScoreCell';
+import ScoreRow from '../ScoreRow/ScoreRow';
 
 
 class ScoresTable extends Component {
@@ -47,6 +48,18 @@ class ScoresTable extends Component {
     }
 
     render() {
+
+        // NEED TO STRUCTURE DATA FOR GRIDDLE!!!!
+        // [
+        // {
+        //     student_name: this.props.students.student_name,
+        //     standard_0: this.props.standards[0].standard_name,
+        //     score: max(this.props.scores where student_id === student.id && standard_id === standard.id)
+        // }
+        //     {
+        //         repeat for all scores...
+        //     }
+        // ]
         
         let standardsMapArray = this.props.standards.map((standard, index) => {
             return(
@@ -56,10 +69,7 @@ class ScoresTable extends Component {
 
         let studentsMapArray = this.props.students.map((student, index) => {
             return (
-                <tr key={index}>
-                    <td>{student.student_name}</td>
-                    <ScoreCell key={index} student={student.id} />
-                </tr>
+                    <ScoreRow key={index} student={student} standard={this.props.standards} />
             )
         });
 
@@ -76,7 +86,8 @@ class ScoresTable extends Component {
                     <p>
                         Scores Table
                     </p>
-                    <table>
+                    <Griddle results={this.props.scores} />
+                    {/* <table>
                         <thead>
                             <tr>
                                 <th></th>
@@ -86,7 +97,7 @@ class ScoresTable extends Component {
                         <tbody>
                             {studentsMapArray}
                         </tbody>
-                    </table>
+                    </table> */}
                     <button onClick={this.editClassroom}>
                         Edit Classroom
                     </button>
