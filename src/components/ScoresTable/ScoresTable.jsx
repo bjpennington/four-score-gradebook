@@ -78,23 +78,18 @@ class ScoresTable extends Component {
                     }
                 )
             })
-            console.log(standardsHeader);
-            console.log(...standardsHeader);
-
-            for (let i = 0; i < standardsHeader; i++) {
-                console.log(standardsHeader[0]);
-            }
-
+            
+            const standardsObject = standardsHeader.reduce((accumulator, currentValue)=> {
+                return {...accumulator, ...currentValue}
+            }, {})
 
             return (
                 {
                     student_name: student.student_name,
-                    ...standardsHeader
+                    ...standardsObject
                 }
             )
         });
-
-        console.log(studentRows);
 
 
         let content = null;
