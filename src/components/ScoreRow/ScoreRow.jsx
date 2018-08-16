@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ScoreCell from '../ScoreCell/ScoreCell';
+// import ScoreCell from '../ScoreCell/ScoreCell';
 
 class ScoreRow extends Component {
     render() {

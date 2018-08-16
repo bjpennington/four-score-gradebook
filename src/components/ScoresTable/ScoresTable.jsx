@@ -4,12 +4,11 @@ import Griddle from 'griddle-react';
 
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
-import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
-import {SCORE_ACTIONS} from '../../redux/actions/scoreActions';
+import { STANDARD_ACTIONS } from '../../redux/actions/standardActions';
+import { STUDENT_ACTIONS } from '../../redux/actions/studentActions';
+import { SCORE_ACTIONS } from '../../redux/actions/scoreActions';
 
 import Nav from '../Nav/Nav';
-import ScoreRow from '../ScoreRow/ScoreRow';
 
 
 class ScoresTable extends Component {
@@ -53,25 +52,50 @@ class ScoresTable extends Component {
         // [
         // {
         //     student_name: this.props.students.student_name,
-        //     standard_0: this.props.standards[0].standard_name,
-        //     score: max(this.props.scores where student_id === student.id && standard_id === standard.id)
+        //     standard_0: this.props.standards[0]score_for_standard: max(this.props.scores where student_id === student.id && standard_id === standard.id)
+        //     repeat for all standards...
         // }
         //     {
         //         repeat for all scores...
         //     }
         // ]
-        
-        let standardsMapArray = this.props.standards.map((standard, index) => {
-            return(
-                <th key={index}>{standard.standard_name}</th>
+
+
+
+        let studentRows = this.props.students.map((student) => {
+
+            let standardsHeader = this.props.standards.map((standard) => {
+                let scoresForStandard = [0]
+                for (let score of this.props.scores) {
+
+                    if (score.standard_id === standard.id && score.student_id === student.id) {
+                        scoresForStandard.push(score.score)
+                    }
+                }
+                return (
+                    {
+                        [standard.standard_name]: Math.max(...scoresForStandard)
+                    }
+                )
+            })
+            console.log(standardsHeader);
+            console.log(...standardsHeader);
+
+            for (let i = 0; i < standardsHeader; i++) {
+                console.log(standardsHeader[0]);
+            }
+
+
+            return (
+                {
+                    student_name: student.student_name,
+                    ...standardsHeader
+                }
             )
         });
 
-        let studentsMapArray = this.props.students.map((student, index) => {
-            return (
-                    <ScoreRow key={index} student={student} standard={this.props.standards} />
-            )
-        });
+        console.log(studentRows);
+
 
         let content = null;
 
@@ -79,25 +103,15 @@ class ScoresTable extends Component {
             content = (
 
                 <div>
-                    {JSON.stringify(this.props.standards)}
-                    {JSON.stringify(this.props.students)}
-                    {JSON.stringify(this.props.scores)}
+                    {/* {JSON.stringify(this.props.standards)} */}
+                    {/* {JSON.stringify(this.props.students)} */}
+                    {/* {JSON.stringify(this.props.scores)} */}
+                    {JSON.stringify(studentRows)}
                     <h3>{this.props.currentClassroom.classroom_name}</h3>
                     <p>
                         Scores Table
                     </p>
-                    <Griddle results={this.props.scores} />
-                    {/* <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                {standardsMapArray}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {studentsMapArray}
-                        </tbody>
-                    </table> */}
+                    <Griddle results={studentRows} />
                     <button onClick={this.editClassroom}>
                         Edit Classroom
                     </button>
