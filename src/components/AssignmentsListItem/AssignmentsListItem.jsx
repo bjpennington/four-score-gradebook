@@ -1,22 +1,33 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {withRouter, Link} from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+// import AddAssignmentModal from '../AddAssignmentModal/AddAssignmentModal';
 
 class AssignmentsListItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            editMode: false,
+        }
+    }
 
     editAssignment = () => {
-        alert('assignments modal will open now')
+        this.setState({
+            editMode: true
+        })
     }
 
     render() {
         console.log('assignment:', this.props);
-        return (
-            <tr>
-                <td><Link to={`/grade/${this.props.assignment.id}`}>{this.props.assignment.assignment_name}</Link></td>
-                <td><button onClick={this.editAssignment}>Edit</button></td>
-            </tr>
-        )
-    }
+            return (
+
+
+                <tr>
+                    <td><Link to={`/grade/${this.props.assignment.id}`}>{this.props.assignment.assignment_name}</Link></td>
+                    <td><button onClick={this.editAssignment}>Edit</button></td>
+                </tr>
+            )
+        }
 }
 
 export default withRouter(connect()(AssignmentsListItem));
