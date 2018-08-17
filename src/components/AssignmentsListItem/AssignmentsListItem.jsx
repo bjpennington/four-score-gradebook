@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-// import AddAssignmentModal from '../AddAssignmentModal/AddAssignmentModal';
 
 class AssignmentsListItem extends Component {
     constructor(props) {

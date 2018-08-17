@@ -11,12 +11,24 @@ function* fetchAssignments(action) {
         })
     }
     catch (error) {
-        console.log('Error on assignmentSaga fetchAssignments:', error)
+        console.log('Error on assignmentSaga fetchAssignments:', error);
+    }
+}
+
+function* addAssignment(action) {
+    try {
+        yield call(axios.post, `/api/assignment`, action.payload);
+        yield fetchAssignments({payload: ''})
+    }
+    catch (error) {
+        console.log('Error on assignmentSaga addAssignment', error);
+        
     }
 }
 
 function* assignmentSaga() {
     yield takeLatest(ASSIGNMENT_ACTIONS.FETCH_ASSIGNMENTS, fetchAssignments);
+    yield takeLatest(ASSIGNMENT_ACTIONS.ADD_ASSIGNMENT, addAssignment);
 }
 
 export default assignmentSaga

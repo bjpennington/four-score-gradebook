@@ -8,7 +8,7 @@ import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
 
 import Nav from '../Nav/Nav';
 import AssignmentsListItem from '../AssignmentsListItem/AssignmentsListItem';
-import AddAssignmentModal from '../AddAssignmentModal/AddAssignmentModal';
+import AddAssignmentDialog from '../AddAssignmentDialog/AddAssignmentDialog';
 
 class Assignments extends Component {
     componentDidMount() {
@@ -47,7 +47,7 @@ class Assignments extends Component {
             content = (
                 <div>
                     <button onClick={() => {this.props.history.push(`/scores/${this.props.match.params.id}`)}}>Back to Classroom</button>
-                    <AddAssignmentModal />
+                    <AddAssignmentDialog />
                     <table>
                         <thead>
                             <tr>
