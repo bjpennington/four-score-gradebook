@@ -20,7 +20,7 @@ function* fetchScore(action) {
 function* createScores(action) {
     try {
         console.log(action.payload)
-        // yield call(axios.post)
+        yield call(axios.post, `/api/score`, action.payload);
     }
     catch (error) {
         console.log('Error on scoreSaga createScores:', error)
