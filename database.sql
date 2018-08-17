@@ -33,9 +33,9 @@ CREATE TABLE "standards" (
 
 CREATE TABLE "scores" (
 	"id" SERIAL PRIMARY KEY,
-	"student_id" INTEGER REFERENCES "students",
+	"student_id" INTEGER REFERENCES "students" ON DELETE CASCADE,
 	"assignment_id" INTEGER REFERENCES "assignments",
-	"standard_id" INTEGER REFERENCES "standards",
+	"standard_id" INTEGER REFERENCES "standards" ON DELETE CASCADE,
 	"classroom_id" INTEGER REFERENCES "classrooms",
 	"score" INTEGER NOT NULL DEFAULT 0
 );
