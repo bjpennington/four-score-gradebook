@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import {ASSIGNMENT_ACTIONS} from '../../redux/actions/assignmentActions';
+import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
 
 import Nav from '../Nav/Nav';
 
@@ -35,6 +35,39 @@ class GradeAssignment extends Component {
                     <h3>
                         {this.props.assignment.assignment_name}
                     </h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Standard</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BJ Pennington</td>
+                                <td>Recognize Design Flaws <br/>Use Appropriate Safety <br/>Measure and Calculate Speed</td>
+                                <td>1 2 3 4 <br/> 1 2 3 4 <br/> 1 2 3 4</td>
+                            </tr>
+                            <tr>
+                                <td>Peter Johnson</td>
+                                <td>Recognize Design Flaws <br/>Use Appropriate Safety <br/>Measure and Calculate Speed</td>
+                                <td>1 2 3 4 <br/> 1 2 3 4 <br/> 1 2 3 4</td>
+                            </tr>
+                            <tr>
+                                <td>Tyler Sehr</td>
+                                <td>Recognize Design Flaws <br/>Use Appropriate Safety <br/>Measure and Calculate Speed</td>
+                                <td>1 2 3 4 <br/> 1 2 3 4 <br/> 1 2 3 4</td>
+                            </tr>
+                            <tr>
+                                <td>De'Anthony Miller</td>
+                                <td>Recognize Design Flaws <br/>Use Appropriate Safety <br/>Measure and Calculate Speed</td>
+                                <td>1 2 3 4 <br/> 1 2 3 4 <br/> 1 2 3 4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button onClick={() => {this.props.history.push(`/assignments/${this.props.assignment.classroom_id}`)}}>Cancel</button>
+                    <button>Submit</button>
                 </div>
             );
         }
