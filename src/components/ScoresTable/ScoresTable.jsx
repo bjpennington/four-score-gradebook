@@ -111,7 +111,7 @@ class ScoresTable extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     currentClassroom: state.classroom.currentClassroom,
-    standards: state.standard.standards,
+    standards: state.standard.standards.allStandards,
     students: state.student.students,
     scores: state.score.scores,
 });

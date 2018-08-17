@@ -35,6 +35,7 @@ class ChipsArray extends React.Component {
 
 
     handleClick = (id) => {
+
         return () => {
             this.props.dispatch({
                 type: STANDARD_ACTIONS.TAG_STANDARD,
@@ -70,7 +71,7 @@ ChipsArray.propTypes = {
 
 const mapStateToProps = (state) => {
     return ({
-        standards: state.standard.standards,
+        standards: state.standard.standards.allStandards,
     })
 }
 

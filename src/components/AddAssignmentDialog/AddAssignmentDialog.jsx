@@ -16,7 +16,7 @@ class AddAssignmentDialog extends Component {
     defaultState = {
         open: false,
         assignment_name: '',
-        assignment_standards: [],
+        assignment_standards: this.props.taggedStandards,
     }
 
     constructor(props) {
@@ -39,26 +39,20 @@ class AddAssignmentDialog extends Component {
         });
     }
 
-    tagStandard = (event) => {
-        this.setState({
-            assignment_standards: [...this.state.assignment_standards, event.target.value]
-        });
-        console.log(event.target.style);
-        console.log(event.target.classList);
-    }
-
     addAssignment = () => {
         this.props.dispatch({
             type: ASSIGNMENT_ACTIONS.ADD_ASSIGNMENT,
             payload: {
                 assignment_name: this.state.assignment_name,
                 classroom_id: this.props.currentClassroom.id,
+                assignment_standards: this.state.assignment_standards,
             }
         });
         this.handleClose();
     }
 
     render() {
+        console.log(this.state.assignment_standards)
         return (
             <div>
                 <Button onClick={this.handleOpen}>Add Assignment</Button>
@@ -99,8 +93,9 @@ class AddAssignmentDialog extends Component {
 
 const mapStateToProps = (state) => {
     return ({
-        standards: state.standard.standards,
-        currentClassroom: state.classroom.currentClassroom
+        standards: state.standard.standards.allStandards,
+        currentClassroom: state.classroom.currentClassroom,
+        taggedStandards: state.standard.standards.taggedStandards,
     })
 }
 
