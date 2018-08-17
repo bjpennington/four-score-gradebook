@@ -47,8 +47,18 @@ class AddAssignmentDialog extends Component {
         console.log(event.target.classList);
     }
 
+    addAssignment = () => {
+        this.props.dispatch({
+            type: ASSIGNMENT_ACTIONS.ADD_ASSIGNMENT,
+            payload: {
+                assignment_name: this.state.assignment_name,
+                classroom_id: this.props.currentClassroom.id,
+            }
+        });
+        this.handleClose();
+    }
+
     render() {
-        console.log(this.state.assignment_name)
         return (
             <div>
                 <Button onClick={this.handleOpen}>Add Assignment</Button>
@@ -77,7 +87,7 @@ class AddAssignmentDialog extends Component {
                         <Button onClick={this.handleClose} color="primary">
                             Cancel
                         </Button>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.addAssignment} color="primary">
                             Save
                         </Button>
                     </DialogActions>
@@ -90,6 +100,7 @@ class AddAssignmentDialog extends Component {
 const mapStateToProps = (state) => {
     return ({
         standards: state.standard.standards,
+        currentClassroom: state.classroom.currentClassroom
     })
 }
 

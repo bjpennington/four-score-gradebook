@@ -18,7 +18,7 @@ function* fetchAssignments(action) {
 function* addAssignment(action) {
     try {
         yield call(axios.post, `/api/assignment`, action.payload);
-        yield fetchAssignments({payload: ''})
+        yield fetchAssignments({payload: action.payload.classroom_id})
     }
     catch (error) {
         console.log('Error on assignmentSaga addAssignment', error);
