@@ -36,7 +36,21 @@ function* addAssignment(action) {
         yield fetchAssignments({payload: action.payload.classroom_id})
     }
     catch (error) {
-        console.log('Error on assignmentSaga addAssignment', error);
+        console.log('Error on assignmentSaga addAssignment:', error);
+        
+    }
+}
+
+function* fetchCurrentAssignment(action) {
+    try {
+        let currentAssignment = yield call(axios.get, `/api/assignment/${action.payload}`);
+        yield dispatch({
+            type: ASSIGNMENT_ACTIONS.SET_CURRENT_ASSIGNMENT,
+            payload: currentAssignment.data[0]
+        });    
+    }
+    catch (error) {
+        console.log('Error on assignmentSaga fetchCurrentAssignment:', error);
         
     }
 }
@@ -44,6 +58,7 @@ function* addAssignment(action) {
 function* assignmentSaga() {
     yield takeLatest(ASSIGNMENT_ACTIONS.FETCH_ASSIGNMENTS, fetchAssignments);
     yield takeLatest(ASSIGNMENT_ACTIONS.ADD_ASSIGNMENT, addAssignment);
+    yield takeLatest(ASSIGNMENT_ACTIONS.FETCH_CURRENT_ASSIGNMENT, fetchCurrentAssignment);
 }
 
 export default assignmentSaga
