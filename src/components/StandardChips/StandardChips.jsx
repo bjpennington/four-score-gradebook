@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
+import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
 
 const styles = theme => ({
     root: {
@@ -18,51 +19,29 @@ const styles = theme => ({
 });
 
 class ChipsArray extends React.Component {
-
-    chipsArray = this.props.standards.map((standard, index) => {
-        return {
-            standard_name: standard.standard_name,
-            id: standard.id,
-            color: "default",
-            colorDefault: true,
-        }
-    });
     
     state = {
-        chipData: this.chipsArray,
-        colorDefault: true,
-        color: "primary",
+        chipData: this.props.standards,
     };
 
+    // handleDelete = data => () => {
+    //     this.setState(state => {
+    //         const chipData = [...state.chipData];
+    //         const chipToDelete = chipData.indexOf(data);
+    //         chipData.splice(chipToDelete, 1);
+    //         return { chipData };
+    //     });
+    // };
 
 
-    handleDelete = data => () => {
-        if (data.label === 'React') {
-            alert('Why would you want to delete React?! :)'); // eslint-disable-line no-alert
-            return;
-        }
-
-        this.setState(state => {
-            const chipData = [...state.chipData];
-            const chipToDelete = chipData.indexOf(data);
-            chipData.splice(chipToDelete, 1);
-            return { chipData };
-        });
-    };
-
-   
-
-    handleClick = (data) => {
-        console.log(data)
-        let chipColor = "default"
-        if(data.colorDefault) {
-            chipColor = "primary"
-        }
-
-        
+    handleClick = (id) => {
+        return () => {
+            this.props.dispatch({
+                type: STANDARD_ACTIONS.TAG_STANDARD,
+                payload: id,
+            });
+        }   
     }
-
-    
 
     render() {
         const { classes } = this.props;
@@ -70,15 +49,13 @@ class ChipsArray extends React.Component {
         return (
             <Paper className={classes.root}>
                 {this.state.chipData.map((data, index) => {
-
-
                     return (
                         <Chip
                             key={index}
                             label={data.standard_name}
-                            onClick={this.handleClick.bind(this, data)}
+                            onClick={this.handleClick(data.id)}
                             className={classes.chip}
-                            color={this.chipColor}
+                            color={data.color}
                         />
                     );
                 })}
