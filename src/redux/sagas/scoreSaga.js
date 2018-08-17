@@ -17,8 +17,19 @@ function* fetchScore(action) {
     }
 }
 
+function* createScores(action) {
+    try {
+        console.log(action.payload)
+        // yield call(axios.post)
+    }
+    catch (error) {
+        console.log('Error on scoreSaga createScores:', error)
+    }
+}
+
 function* scoreSaga() {
     yield takeLatest(SCORE_ACTIONS.FETCH_SCORE, fetchScore);
+    yield takeLatest(SCORE_ACTIONS.ADD_SCORE, createScores);
 }
 
 export default scoreSaga;

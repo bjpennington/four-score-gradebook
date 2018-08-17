@@ -17,7 +17,6 @@ class AssignmentsListItem extends Component {
     }
 
     render() {
-        console.log('assignment:', this.props);
             return (
 
 

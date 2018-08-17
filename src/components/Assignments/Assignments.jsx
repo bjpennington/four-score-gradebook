@@ -5,6 +5,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
 import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
+import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
 
 import Nav from '../Nav/Nav';
 import AssignmentsListItem from '../AssignmentsListItem/AssignmentsListItem';
@@ -25,6 +26,10 @@ class Assignments extends Component {
             type: STANDARD_ACTIONS.FETCH_STANDARD,
             payload: this.props.match.params.id,
         });
+        this.props.dispatch({
+            type: STUDENT_ACTIONS.FETCH_STUDENT,
+            payload: this.props.match.params.id,
+        })
     }
 
     componentDidUpdate() {

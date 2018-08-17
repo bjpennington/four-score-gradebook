@@ -1,5 +1,6 @@
 import { put as dispatch, takeLatest, call } from 'redux-saga/effects';
 import {ASSIGNMENT_ACTIONS} from '../actions/assignmentActions';
+import {SCORE_ACTIONS} from '../actions/scoreActions';
 import axios from 'axios';
 
 function* fetchAssignments(action) {
@@ -17,7 +18,21 @@ function* fetchAssignments(action) {
 
 function* addAssignment(action) {
     try {
-        yield call(axios.post, `/api/assignment`, action.payload);
+        let standardsIds = [];
+        for(let standard of action.payload.assignment_standards) {
+            standardsIds = [...standardsIds, standard.id]
+        }
+        let studentsIds = [];
+        for(let student of action.payload.class_students) {
+            studentsIds = [...studentsIds, student.id]
+        }
+        console.log('ADD ASSIGNMENT PAYLOAD:', action.payload);
+        let newAssignmentId = yield call(axios.post, `/api/assignment`, {assignment_name: action.payload.assignment_name, classroom_id: action.payload.classroom_id});
+        console.log(newAssignmentId.data)
+        yield dispatch({
+            type: SCORE_ACTIONS.ADD_SCORE,
+            payload: {classroom_id: action.payload.classroom_id, assignment_id: newAssignmentId.data[0].id, standardsIds, studentsIds}
+        })
         yield fetchAssignments({payload: action.payload.classroom_id})
     }
     catch (error) {
