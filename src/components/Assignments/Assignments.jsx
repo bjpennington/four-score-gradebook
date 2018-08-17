@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
+import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
+import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
 
 import Nav from '../Nav/Nav';
 import AssignmentsListItem from '../AssignmentsListItem/AssignmentsListItem';
+import AddAssignmentDialog from '../AddAssignmentDialog/AddAssignmentDialog';
 
 class Assignments extends Component {
     componentDidMount() {
@@ -15,7 +18,18 @@ class Assignments extends Component {
             type: CLASSROOM_ACTIONS.FETCH_CURRENT_CLASSROOM,
             payload: this.props.match.params.id,
         });
-        this.props.dispatch({type: ASSIGNMENT_ACTIONS.FETCH_ASSIGNMENTS, payload: this.props.match.params.id})
+        this.props.dispatch({
+            type: ASSIGNMENT_ACTIONS.FETCH_ASSIGNMENTS,
+            payload: this.props.match.params.id,
+        });
+        this.props.dispatch({
+            type: STANDARD_ACTIONS.FETCH_STANDARD,
+            payload: this.props.match.params.id,
+        });
+        this.props.dispatch({
+            type: STUDENT_ACTIONS.FETCH_STUDENT,
+            payload: this.props.match.params.id,
+        })
     }
 
     componentDidUpdate() {
@@ -25,7 +39,6 @@ class Assignments extends Component {
     }
 
     render() {
-        console.log('assignments props:', this.props);
 
         let assignmentMapArray = this.props.assignments.map((assignment, index) => {
             return (
@@ -39,9 +52,7 @@ class Assignments extends Component {
             content = (
                 <div>
                     <button onClick={() => {this.props.history.push(`/scores/${this.props.match.params.id}`)}}>Back to Classroom</button>
-                    <button onClick={() => alert('Add assignment modal pops up here')}>
-                        Add Assignment
-                    </button>
+                    <AddAssignmentDialog />
                     <table>
                         <thead>
                             <tr>

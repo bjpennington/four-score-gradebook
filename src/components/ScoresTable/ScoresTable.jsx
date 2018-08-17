@@ -48,20 +48,6 @@ class ScoresTable extends Component {
 
     render() {
 
-        // NEED TO STRUCTURE DATA FOR GRIDDLE!!!!
-        // [
-        // {
-        //     student_name: this.props.students.student_name,
-        //     standard_0: this.props.standards[0]score_for_standard: max(this.props.scores where student_id === student.id && standard_id === standard.id)
-        //     repeat for all standards...
-        // }
-        //     {
-        //         repeat for all scores...
-        //     }
-        // ]
-
-
-
         let studentRows = this.props.students.map((student) => {
 
             let standardsHeader = this.props.standards.map((standard) => {
@@ -98,10 +84,6 @@ class ScoresTable extends Component {
             content = (
 
                 <div>
-                    {/* {JSON.stringify(this.props.standards)} */}
-                    {/* {JSON.stringify(this.props.students)} */}
-                    {/* {JSON.stringify(this.props.scores)} */}
-                    {JSON.stringify(studentRows)}
                     <h3>{this.props.currentClassroom.classroom_name}</h3>
                     <p>
                         Scores Table
@@ -129,7 +111,7 @@ class ScoresTable extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     currentClassroom: state.classroom.currentClassroom,
-    standards: state.standard.standards,
+    standards: state.standard.standards.allStandards,
     students: state.student.students,
     scores: state.score.scores,
 });

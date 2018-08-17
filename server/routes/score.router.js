@@ -15,4 +15,28 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.post('/', rejectUnauthenticated, (req, res) => {
+    console.log('SCORES POST REQ.BODY:', req.body);
+    let allScores = [];
+    for (let student of req.body.studentsIds) {
+        let assignmentForStandard = [];
+        for (let standard of req.body.standardsIds) {
+            assignmentForStandard = [...assignmentForStandard, [student, req.body.assignment_id, standard, req.body.classroom_id]]
+        }
+        allScores = [...allScores, ...assignmentForStandard]
+    }
+    let isPostError = false;
+    queryText = `INSERT INTO "scores" ("student_id", "assignment_id", "standard_id", "classroom_id") VALUES ($1, $2, $3, $4);`
+    for (let score of allScores) {
+        pool.query(queryText, [score[0], score[1], score[2], score[3]])
+        .then(response => {})
+        .catch(error => {
+            console.log('Error on /api/score POST:', error);
+            isPostError = true;
+        });
+    }
+    if (isPostError) {res.sendStatus(201)}
+    else {res.sendStatus(500)}
+});
+
 module.exports = router;
