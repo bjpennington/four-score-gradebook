@@ -4,31 +4,29 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import ChipsArray from '../StandardChips/StandardChips';
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+    const top = 50;
+    const left = 50;
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
+    return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+    };
 }
 
 const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    width: theme.spacing.unit * 50,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-  },
+    paper: {
+        position: 'absolute',
+        width: theme.spacing.unit * 50,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 4,
+    },
 });
 
 
@@ -37,57 +35,66 @@ class AddAssignmentModal extends React.Component {
         super(props);
         this.state = {
             open: false,
-            assignment_name: ''
-          };
+            assignment_name: '',
+            assignment_standards: [],
+        };
     }
 
-  
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
+    handleOpen = () => {
+        this.setState({ open: true });
+    };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+    handleClose = () => {
+        this.setState({ open: false });
+    };
 
-  render() {
-    const {classes}  = this.props;
-    console.log(this.props)
+    handleAssignmentInputChange = (event) => {
+        this.setState({
+            assignment_name: event.target.value,
+        });
+    }
 
-    const standardsMapArray = this.props.standards.map((standard, index) => {
+    tagStandard = (event) => {
+        this.setState({
+            assignment_standards: [...this.state.assignment_standards, event.target.value]
+        });
+        console.log(event.target.style);
+        console.log(event.target.classList);
+    }
+
+    render() {
+        const { classes } = this.props;
+        console.log(this.props)
+        console.log(this.state.assignment_standards)
+        console.log(this.state.assignment_name)
+
         return (
-            <li key={index}>{standard.standard_name}</li>
-        )
-    });
-
-    return (
-      <div>
-        <Button onClick={this.handleOpen}>Add Assignment</Button>
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.state.open}
-          onClose={this.handleClose}
-        >
-          <div style={getModalStyle()} className={classes.paper}>
-            <Typography variant="title" id="modal-title">
-              Assignment Name:
+            <div>
+                <Button onClick={this.handleOpen}>Add Assignment</Button>
+                <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                >
+                    <div style={getModalStyle()} className={classes.paper}>
+                        <Typography variant="title" id="modal-title">
+                            Assignment Name:
             </Typography>
-            <input type="text"/>
-            <ul>
-                {standardsMapArray}
-            </ul>
-            <AddAssignmentModalWrapped />
-          </div>
-        </Modal>
-      </div>
-    );
-  }
+                        <input type="text" onChange={this.handleAssignmentInputChange} value={this.state.assignment_name} />
+                        <h3>Select Assignment Standards:</h3>
+                        <ChipsArray />
+                        <AddAssignmentModalWrapped />
+                    </div>
+                </Modal>
+            </div>
+        );
+    }
 }
 
 AddAssignmentModal.propTypes = {
-  classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {

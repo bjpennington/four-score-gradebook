@@ -34,7 +34,6 @@ class Assignments extends Component {
     }
 
     render() {
-        console.log('assignments props:', this.props);
 
         let assignmentMapArray = this.props.assignments.map((assignment, index) => {
             return (

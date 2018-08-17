@@ -71,7 +71,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/assignments/:id', rejectUnauthenticated, (req, res) => {
-    console.log('/assignments req.body:', req.body, '/assignments req.user:', req.user, 'assignment req.params:', req.params);
     queryText = `SELECT * FROM "assignments" WHERE "classroom_id" = $1;`
     pool.query(queryText, [req.params.id])
         .then(response => {
