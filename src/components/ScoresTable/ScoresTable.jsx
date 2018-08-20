@@ -85,6 +85,7 @@ class ScoresTable extends Component {
 
                 <div>
                     <h3>{this.props.currentClassroom.classroom_name}</h3>
+                    {JSON.stringify(studentRows)}
                     <p>
                         Scores Table
                     </p>

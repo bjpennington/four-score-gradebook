@@ -53,7 +53,6 @@ class AddStudent extends Component {
 
         return (
             <div>
-                {JSON.stringify(this.props.classroomStudents)}
                 <form onSubmit={this.addStudent}>
                     <input
                         type="text"

@@ -7,6 +7,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
 
 import Nav from '../Nav/Nav';
+import GradeAssignmentListItem from '../GradeAssignmentListItem/GradeAssignmentListItem';
 
 class GradeAssignment extends Component {
     componentDidMount() {
@@ -30,8 +31,6 @@ class GradeAssignment extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
-                    {JSON.stringify(this.props.assignment)}
-                    {JSON.stringify(this.props.assignment.assignment_name)}
                     <h3>
                         {this.props.assignment.assignment_name}
                     </h3>
@@ -44,29 +43,10 @@ class GradeAssignment extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>BJ Pennington</td>
-                                <td>Recognize Design Flaws <br/>Use Appropriate Safety <br/>Measure and Calculate Speed</td>
-                                <td>1 2 3 4 <br/> 1 2 3 4 <br/> 1 2 3 4</td>
-                            </tr>
-                            <tr>
-                                <td>Peter Johnson</td>
-                                <td>Recognize Design Flaws <br/>Use Appropriate Safety <br/>Measure and Calculate Speed</td>
-                                <td>1 2 3 4 <br/> 1 2 3 4 <br/> 1 2 3 4</td>
-                            </tr>
-                            <tr>
-                                <td>Tyler Sehr</td>
-                                <td>Recognize Design Flaws <br/>Use Appropriate Safety <br/>Measure and Calculate Speed</td>
-                                <td>1 2 3 4 <br/> 1 2 3 4 <br/> 1 2 3 4</td>
-                            </tr>
-                            <tr>
-                                <td>De'Anthony Miller</td>
-                                <td>Recognize Design Flaws <br/>Use Appropriate Safety <br/>Measure and Calculate Speed</td>
-                                <td>1 2 3 4 <br/> 1 2 3 4 <br/> 1 2 3 4</td>
-                            </tr>
+                            <GradeAssignmentListItem assignment_id={this.props.match.params.id} />
                         </tbody>
                     </table>
-                    <button onClick={() => {this.props.history.push(`/assignments/${this.props.assignment.classroom_id}`)}}>Cancel</button>
+                    <button onClick={() => { this.props.history.push(`/assignments/${this.props.assignment.classroom_id}`) }}>Cancel</button>
                     <button>Submit</button>
                 </div>
             );

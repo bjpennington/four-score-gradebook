@@ -54,7 +54,6 @@ class AddStandard extends Component {
 
         return (
             <div>
-                {JSON.stringify(this.props.classroomStandards)}
                 <form onSubmit={this.addStandard}>
                     <input
                         type="text"

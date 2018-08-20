@@ -40,21 +40,6 @@ const standards = (state = {allStandards: [], taggedStandards: []}, action) => {
     }
 }
 
-// const taggedStandards = (state = [], action) => {
-//     switch (action.type) {
-//         case STANDARD_ACTIONS.SET_ALL_TAGGED_STANDARDS:
-//             let taggedStandards = []
-//             for (let i = 0; i < action.payload; i++) {
-//                 if (action.payload[i].tagged) {
-//                     taggedStandards = [...taggedStandards, action.payload[i]]
-//                 }
-//             }
-//             // else { return taggedStandards }
-//             return taggedStandards || state;
-//         default:
-//             return state;
-//     }
-// }
 
 export default combineReducers({
     standards,
