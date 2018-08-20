@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { SCORE_ACTIONS } from '../../redux/actions/scoreActions';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
 
 import Nav from '../Nav/Nav';
@@ -15,7 +15,11 @@ class GradeAssignment extends Component {
         this.props.dispatch({
             type: ASSIGNMENT_ACTIONS.FETCH_CURRENT_ASSIGNMENT,
             payload: this.props.match.params.id
-        })
+        });
+        this.props.dispatch({
+            type: SCORE_ACTIONS.FETCH_ASSIGNMENT_SCORES,
+            payload: this.props.match.params.id,
+        });
     }
 
     componentDidUpdate() {
@@ -26,6 +30,12 @@ class GradeAssignment extends Component {
 
     render() {
         let content = null;
+
+        let scoresMapArray = this.props.scores.map((score, index) => {
+            return(
+                <GradeAssignmentListItem key={index} score={score} />
+            )
+        })
 
         if (this.props.user.userName) {
             content = (
@@ -42,7 +52,7 @@ class GradeAssignment extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <GradeAssignmentListItem assignment_id={this.props.match.params.id} />
+                            {scoresMapArray}
                         </tbody>
                     </table>
                     <button onClick={() => { this.props.history.push(`/assignments/${this.props.assignment.classroom_id}`) }}>Cancel</button>
@@ -63,6 +73,7 @@ class GradeAssignment extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     assignment: state.assignment.currentAssignment,
+    scores: state.score.scores,
 });
 
 export default withRouter(connect(mapStateToProps)(GradeAssignment));

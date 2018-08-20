@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-
-import {SCORE_ACTIONS} from '../../redux/actions/scoreActions';
+import { connect } from 'react-redux';
 
 class GradeAssignmentListItem extends Component {
-    componentDidMount() {
-        this.props.dispatch({
-            type: SCORE_ACTIONS.FETCH_ASSIGNMENT_SCORES,
-            payload: this.props.assignment_id,
-        })
-    }
+
     render() {
+
+        let scoreRadioButtons =
+            <form>
+                <input type="radio" name="score" value="1" />1
+                <input type="radio" name="score" value="2" />2
+                <input type="radio" name="score" value="3" />3
+                <input type="radio" name="score" value="4" />4
+            </form>
+
         return (
             <tr>
-                <td>BJ Pennington</td>
-                <td>Recognize Design Flaws <br />Use Appropriate Safety <br />Measure and Calculate Speed</td>
-                <td>1 2 3 4 <br /> 1 2 3 4 <br /> 1 2 3 4</td>
+                <td>{this.props.score.student_name}</td>
+                <td>{this.props.score.standard_name}</td>
+                <td>{scoreRadioButtons}</td>
             </tr>
         )
     }
@@ -23,7 +25,7 @@ class GradeAssignmentListItem extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return({
+    return ({
         scores: state.score.scores,
     });
 }
