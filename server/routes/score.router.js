@@ -50,22 +50,26 @@ router.post('/', rejectUnauthenticated, (req, res) => {
                 isPostError = true;
             });
     }
-    if (isPostError) { res.sendStatus(201) }
-    else { res.sendStatus(500) }
+    if (isPostError) { res.sendStatus(500) }
+    else { res.sendStatus(201) }
 });
 
 router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log('SCORE PUT REQ.BODY:', req.body);
-    
+    let scoresToUpdate = req.body
+
+    let isPostError = false;
+
     queryText = `UPDATE "scores" SET "score" = $1 WHERE "id" = $2;`;
-    pool.query(queryText, [req.body.newScore, req.body.scoreId])
-        .then(response => {
-            res.sendStatus(200);
-        })
-        .catch(error => {
-            console.log('Error on /api/score PUT:', error);
-            res.sendStatus(500);
-        });
+    for (let score of scoresToUpdate) {
+        pool.query(queryText, [score.newScore, score.scoreId])
+            .then(response => { })
+            .catch(error => {
+                console.log('Error on /api/score PUT:', error);
+                isPostError = true;
+            });
+    }
+    if (isPostError) { res.sendStatus(500) }
+    else { res.sendStatus(200) }
 });
 
 module.exports = router;

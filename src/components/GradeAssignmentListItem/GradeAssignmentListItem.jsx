@@ -5,21 +5,11 @@ import {SCORE_ACTIONS} from '../../redux/actions/scoreActions';
 
 class GradeAssignmentListItem extends Component {
 
-    editScore = (event) => {
-        this.props.dispatch({
-            type: SCORE_ACTIONS.EDIT_SCORE,
-            payload: {
-                scoreId: this.props.score.id,
-                newScore: parseInt(event.target.value),
-            },
-        });
-    }
-
 
     render() {
 
         let scoreRadioButtons =
-            <form onChange={this.editScore}>
+            <form onChange={(event) => {this.props.editScore(event.target.value, this.props.score.id)}}>
                 <input type="radio" name="score" value="0" defaultChecked={this.props.score.score === 0} />0
                 <input type="radio" name="score" value="1" defaultChecked={this.props.score.score === 1} />1
                 <input type="radio" name="score" value="2" defaultChecked={this.props.score.score === 2} />2

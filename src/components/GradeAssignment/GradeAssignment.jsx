@@ -10,6 +10,14 @@ import Nav from '../Nav/Nav';
 import GradeAssignmentListItem from '../GradeAssignmentListItem/GradeAssignmentListItem';
 
 class GradeAssignment extends Component {
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            arrayOfChanges: [],
+        }
+    }
     componentDidMount() {
         this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
         this.props.dispatch({
@@ -28,14 +36,35 @@ class GradeAssignment extends Component {
         }
     }
 
+    editScore = (eventValue, id) => {
+        this.setState({
+            arrayOfChanges: [
+                ...this.state.arrayOfChanges,
+                {
+                    newScore: eventValue,
+                    scoreId: id,
+                }
+            ]
 
+        })
+    }
+
+    sendScoreUpdates = () => {
+        // if (this.state.arrayOfChanges.length !== 0) {
+            this.props.dispatch({
+                type: SCORE_ACTIONS.EDIT_SCORE,
+                payload: this.state.arrayOfChanges,
+            });
+        // }
+    }
 
     render() {
         let content = null;
+        console.log(this.state)
 
         let scoresMapArray = this.props.scores.map((score, index) => {
             return (
-                <GradeAssignmentListItem key={index} score={score} />
+                <GradeAssignmentListItem key={index} score={score} editScore={this.editScore} />
             )
         })
 
@@ -57,7 +86,7 @@ class GradeAssignment extends Component {
                             {scoresMapArray}
                         </tbody>
                     </table>
-                    <button>Submit</button>
+                    <button onClick={this.sendScoreUpdates}>Save</button>
                 </div>
             );
         }
