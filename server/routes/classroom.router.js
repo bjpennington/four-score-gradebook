@@ -19,7 +19,6 @@ const sampleAssignments = [
 ]
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    console.log('classroom req.body:', req.body, 'classroom req.user:', req.user);
     queryText = `SELECT * FROM "classrooms" WHERE "person_id" = $1;`
     pool.query(queryText, [req.user.id])
         .then(response => {
@@ -32,11 +31,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log('new classroom post req.body:', req.body, 'new classroom req.user:', req.user);
     queryText = `INSERT INTO "classrooms" ("classroom_name", "person_id") VALUES ($1, $2) RETURNING "id", "classroom_name";`
     pool.query(queryText, [req.body.classroom_name, req.user.id])
         .then(response => {
-            console.log(response);
             res.send(response.rows[0]);
         })
         .catch(error => {
@@ -46,7 +43,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log(' classroom to edit req.body:', req.body, 'classroom to edit req.user:', req.user);
     queryText = `UPDATE "classrooms" SET "classroom_name" = $1 WHERE "id" = $2 RETURNING *;`
     pool.query(queryText, [req.body.classroom_name, req.body.id])
         .then(response => {

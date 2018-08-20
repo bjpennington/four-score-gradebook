@@ -32,7 +32,6 @@ router.get('/assignment/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log('SCORES POST REQ.BODY:', req.body);
     let allScores = [];
     for (let student of req.body.studentsIds) {
         let assignmentForStandard = [];

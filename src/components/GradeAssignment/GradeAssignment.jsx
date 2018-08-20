@@ -26,7 +26,6 @@ class GradeAssignment extends Component {
 
     render() {
         let content = null;
-        console.log(this.props)
 
         if (this.props.user.userName) {
             content = (

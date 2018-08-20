@@ -27,7 +27,6 @@ function* addAssignment(action) {
             studentsIds = [...studentsIds, student.id]
         }
         let newAssignmentId = yield call(axios.post, `/api/assignment`, {assignment_name: action.payload.assignment_name, classroom_id: action.payload.classroom_id});
-        console.log(newAssignmentId.data)
         yield dispatch({
             type: SCORE_ACTIONS.ADD_SCORE,
             payload: {classroom_id: action.payload.classroom_id, assignment_id: newAssignmentId.data[0].id, standardsIds, studentsIds}

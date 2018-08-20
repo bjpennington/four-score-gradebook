@@ -14,9 +14,7 @@ function* addStudent(action) {
 
 function* fetchStudent(action) {
     try {
-        console.log('assignments payload:', action.payload)
         const students = yield call(axios.get, `/api/student/${action.payload}`);
-        console.log(students.data);
         yield dispatch({
             type: STUDENT_ACTIONS.SET_STUDENTS,
             payload: students.data
@@ -29,9 +27,7 @@ function* fetchStudent(action) {
 
 function* deleteStudent(action) {
     try {
-        const classroom = yield call(axios.delete, `/api/student/${action.payload}`);
-        console.log(classroom.data.classroom_id);
-        
+        const classroom = yield call(axios.delete, `/api/student/${action.payload}`);        
         yield fetchStudent({payload: classroom.data.classroom_id});
     }
     catch (error) {

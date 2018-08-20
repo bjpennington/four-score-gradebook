@@ -4,7 +4,6 @@ const {rejectUnauthenticated} = require('../modules/authentication-middleware')
 const router = express.Router();
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log(req.body);
     queryText = `INSERT INTO "students" ("student_name", "classroom_id") VALUES ($1, $2);`;
     pool.query(queryText, [req.body.newStudent, req.body.classroom_id])
         .then(response => {
@@ -17,7 +16,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('/students req.body:', req.body, '/students req.user:', req.user, 'students req.params:', req.params);
     queryText = `SELECT * FROM "students" WHERE "classroom_id" = $1;`
     pool.query(queryText, [req.params.id])
         .then(response => {

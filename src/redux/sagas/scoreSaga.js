@@ -5,7 +5,6 @@ import axios from 'axios';
 function* fetchScore(action) {
     try {
         const scores = yield call(axios.get, `/api/score/${action.payload}`);
-        console.log(scores.data);
         yield dispatch({
             type: SCORE_ACTIONS.SET_SCORE,
             payload: scores.data
@@ -19,7 +18,6 @@ function* fetchScore(action) {
 function* fetchAssignmentScores(action) {
     try {
         const scores = yield call(axios.get, `/api/score/assignment/${action.payload}`);
-        console.log(scores.data);
         yield dispatch({
             type: SCORE_ACTIONS.SET_SCORE,
             payload: scores.data
@@ -33,7 +31,6 @@ function* fetchAssignmentScores(action) {
 
 function* createScores(action) {
     try {
-        console.log(action.payload)
         yield call(axios.post, `/api/score`, action.payload);
     }
     catch (error) {

@@ -47,7 +47,6 @@ class ManageClassroom extends Component {
 
     updateClassroomName = (event) => {
         event.preventDefault();
-        console.log('classroom created:', this.state);
         this.props.dispatch({
             type: CLASSROOM_ACTIONS.EDIT_CLASSROOM,
             payload: this.state

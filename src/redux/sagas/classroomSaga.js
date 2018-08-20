@@ -5,7 +5,6 @@ import axios from 'axios';
 function* fetchClassrooms() {
     try {
         const classrooms = yield call(axios.get, '/api/classroom');
-        console.log(classrooms.data);
         yield dispatch({
             type: CLASSROOM_ACTIONS.SET_ALL_CLASSROOMS,
             payload: classrooms.data
@@ -19,7 +18,6 @@ function* fetchClassrooms() {
 function* fetchCurrentClassroom(action) {
     try {
       const currentClassroom = yield call(axios.get, `/api/classroom/${action.payload}`);
-      console.log('CURRENTCLASSROOM SAGA RETURN:', currentClassroom.data)
       yield dispatch({
           type: CLASSROOM_ACTIONS.SET_CURRENT_CLASSROOM,
           payload: currentClassroom.data[0],
@@ -33,7 +31,6 @@ function* fetchCurrentClassroom(action) {
 function* postClassroom(action) {
     try {
         const newClassroom = yield call(axios.post, '/api/classroom', action.payload);
-        console.log('newClassroom id?', newClassroom.data);
         yield fetchClassrooms();
     }
     catch (error) {
