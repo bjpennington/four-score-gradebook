@@ -28,11 +28,13 @@ class GradeAssignment extends Component {
         }
     }
 
+
+
     render() {
         let content = null;
 
         let scoresMapArray = this.props.scores.map((score, index) => {
-            return(
+            return (
                 <GradeAssignmentListItem key={index} score={score} />
             )
         })
@@ -55,7 +57,6 @@ class GradeAssignment extends Component {
                             {scoresMapArray}
                         </tbody>
                     </table>
-                    <button onClick={() => { this.props.history.push(`/assignments/${this.props.assignment.classroom_id}`) }}>Cancel</button>
                     <button>Submit</button>
                 </div>
             );

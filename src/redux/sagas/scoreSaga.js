@@ -38,10 +38,20 @@ function* createScores(action) {
     }
 }
 
+function* updateScore(action) {
+    try {
+        yield call(axios.put, `/api/score`, action.payload);
+    }
+    catch (error) {
+        console.log('Error on scoreSaga updateScore:', error)
+    }
+}
+
 function* scoreSaga() {
     yield takeLatest(SCORE_ACTIONS.FETCH_SCORE, fetchScore);
     yield takeLatest(SCORE_ACTIONS.ADD_SCORE, createScores);
     yield takeLatest(SCORE_ACTIONS.FETCH_ASSIGNMENT_SCORES, fetchAssignmentScores);
+    yield takeLatest(SCORE_ACTIONS.EDIT_SCORE, updateScore);
 }
 
 export default scoreSaga;

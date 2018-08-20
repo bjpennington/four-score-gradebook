@@ -16,7 +16,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/assignment/:id', rejectUnauthenticated, (req, res) => {
-    queryText = `SELECT "scores"."id", "students"."student_name", "standards"."standard_name", "scores"."score" FROM "scores"
+    queryText = `SELECT "scores"."id", "scores"."student_id", "students"."student_name", "standards"."standard_name", "scores"."score" FROM "scores"
                     JOIN "standards" ON "scores"."standard_id" = "standards"."id"
                     JOIN "students" ON "scores"."student_id" = "students"."id"
                     WHERE "scores"."assignment_id" = $1
@@ -52,6 +52,20 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     }
     if (isPostError) { res.sendStatus(201) }
     else { res.sendStatus(500) }
+});
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+    console.log('SCORE PUT REQ.BODY:', req.body);
+    
+    queryText = `UPDATE "scores" SET "score" = $1 WHERE "id" = $2;`;
+    pool.query(queryText, [req.body.newScore, req.body.scoreId])
+        .then(response => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log('Error on /api/score PUT:', error);
+            res.sendStatus(500);
+        });
 });
 
 module.exports = router;
