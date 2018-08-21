@@ -5,7 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 // import DialogContentText from '@material-ui/core/DialogContentText';
-// import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import ChipsArray from '../StandardChips/StandardChips';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
@@ -84,7 +84,7 @@ class AddAssignmentDialog extends Component {
                             onChange={this.handleAssignmentInputChange}
                             value={this.state.assignment_name}
                         />
-                        <h3>Select Assignment Standards:</h3>
+                        <DialogTitle>Select Assignment Standards:</DialogTitle>
                         <ChipsArray />
                     </DialogContent>
                     <DialogActions>
