@@ -37,15 +37,16 @@ class GradeAssignment extends Component {
     }
 
     editScore = (eventValue, id) => {
+        let arrayToFilter = [...this.state.arrayOfChanges];
+        let filteredArray = arrayToFilter.filter(function(score) {
+            return score.scoreId !== id
+        });
         this.setState({
-            arrayOfChanges: [
-                ...this.state.arrayOfChanges,
-                {
-                    newScore: eventValue,
-                    scoreId: id,
-                }
-            ]
-        })
+            arrayOfChanges: [...filteredArray,   {
+                newScore: eventValue,
+                scoreId: id,
+            }]
+        });
     }
 
     sendScoreUpdates = () => {
@@ -63,7 +64,7 @@ class GradeAssignment extends Component {
                 this.props.history.push(`/scores/${this.props.assignment.classroom_id}`)
             }
         }
-        else {this.props.history.push(`/scores/${this.props.assignment.classroom_id}`)}
+        else { this.props.history.push(`/scores/${this.props.assignment.classroom_id}`) }
     }
 
     render() {
