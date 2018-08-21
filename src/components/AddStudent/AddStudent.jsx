@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
-import {withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
+import { STUDENT_ACTIONS } from '../../redux/actions/studentActions';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import StudentListItem from '../StudentListItem/StudentListItem';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AddStudent extends Component {
 
@@ -37,9 +39,12 @@ class AddStudent extends Component {
             type: STUDENT_ACTIONS.ADD_STUDENT,
             payload: this.state
         });
+        toast("Student added!", {
+            hideProgressBar: true,
+        });
         this.setState(
             this.defaultState
-        )
+        );
     }
 
     render() {
@@ -52,6 +57,10 @@ class AddStudent extends Component {
 
         return (
             <div>
+                <ToastContainer
+                    autoClose={2500}
+                    newestOnTop
+                />
                 <form onSubmit={this.addStudent}>
                     <input
                         type="text"
@@ -80,7 +89,7 @@ class AddStudent extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return({
+    return ({
         classroomStudents: state.student.students,
     })
 }

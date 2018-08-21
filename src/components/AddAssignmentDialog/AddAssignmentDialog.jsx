@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import ChipsArray from '../StandardChips/StandardChips';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
 import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
+import swal from 'sweetalert';
 
 class AddAssignmentDialog extends Component {
 
@@ -51,7 +52,14 @@ class AddAssignmentDialog extends Component {
                 class_students: this.props.classStudents,
             }
         });
+        swal({
+            title: "Assignment Created!",
+            icon: "success",
+            buttons: false,
+            timer: 2000,
+        });
         this.handleClose();
+
     }
 
     render() {
