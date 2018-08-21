@@ -45,22 +45,30 @@ class GradeAssignment extends Component {
                     scoreId: id,
                 }
             ]
-
         })
     }
 
     sendScoreUpdates = () => {
-        // if (this.state.arrayOfChanges.length !== 0) {
+        if (this.state.arrayOfChanges.length !== 0) {
             this.props.dispatch({
                 type: SCORE_ACTIONS.EDIT_SCORE,
                 payload: this.state.arrayOfChanges,
             });
-        // }
+        }
+    }
+
+    cancelGrading = () => {
+        if (this.state.arrayOfChanges.length > 0) {
+            if (window.confirm('Are you sure you want to cancel?')) {
+                this.props.history.push(`/scores/${this.props.assignment.classroom_id}`)
+            }
+        }
+        else {this.props.history.push(`/scores/${this.props.assignment.classroom_id}`)}
     }
 
     render() {
         let content = null;
-        console.log(this.state)
+        console.log(this.state.arrayOfChanges)
 
         let scoresMapArray = this.props.scores.map((score, index) => {
             return (
@@ -86,6 +94,7 @@ class GradeAssignment extends Component {
                             {scoresMapArray}
                         </tbody>
                     </table>
+                    <button onClick={this.cancelGrading}>Cancel</button>
                     <button onClick={this.sendScoreUpdates}>Save</button>
                 </div>
             );
@@ -103,7 +112,7 @@ class GradeAssignment extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     assignment: state.assignment.currentAssignment,
-    scores: state.score.scores,
+    scores: state.score.assignmentScores,
 });
 
 export default withRouter(connect(mapStateToProps)(GradeAssignment));

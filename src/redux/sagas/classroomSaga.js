@@ -30,7 +30,7 @@ function* fetchCurrentClassroom(action) {
 
 function* postClassroom(action) {
     try {
-        const newClassroom = yield call(axios.post, '/api/classroom', action.payload);
+        yield call(axios.post, '/api/classroom', action.payload);
         yield fetchClassrooms();
     }
     catch (error) {

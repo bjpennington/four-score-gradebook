@@ -10,6 +10,16 @@ const scores = (state = [], action) => {
     }
 }
 
+const assignmentScores = (state = [], action) => {
+    switch (action.type) {
+        case SCORE_ACTIONS.SET_ASSIGNMENT_SCORES:
+            return action.payload || state;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     scores,
+    assignmentScores,
 });

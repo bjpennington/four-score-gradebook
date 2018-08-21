@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {SCORE_ACTIONS} from '../../redux/actions/scoreActions';
-
 class GradeAssignmentListItem extends Component {
 
 

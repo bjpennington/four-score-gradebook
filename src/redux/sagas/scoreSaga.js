@@ -19,7 +19,7 @@ function* fetchAssignmentScores(action) {
     try {
         const scores = yield call(axios.get, `/api/score/assignment/${action.payload}`);
         yield dispatch({
-            type: SCORE_ACTIONS.SET_SCORE,
+            type: SCORE_ACTIONS.SET_ASSIGNMENT_SCORES,
             payload: scores.data
         });
         
