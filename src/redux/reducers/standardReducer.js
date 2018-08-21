@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 import { STANDARD_ACTIONS } from '../actions/standardActions';
 
-const standards = (state = {allStandards: [], taggedStandards: []}, action) => {
+const standards = (state = { allStandards: [], taggedStandards: [] }, action) => {
     switch (action.type) {
+
         case STANDARD_ACTIONS.SET_STANDARDS:
             let reduxStandards = action.payload.map((standard) => {
                 return (
@@ -15,9 +16,10 @@ const standards = (state = {allStandards: [], taggedStandards: []}, action) => {
                     }
                 )
             });
-            return {...state, allStandards: reduxStandards} || state;
+            return { ...state, allStandards: reduxStandards } || state;
+
         case STANDARD_ACTIONS.TAG_STANDARD:
-            let tagIndex = state.allStandards.findIndex(x => x.id === action.payload);
+            let tagIndex = state.allStandards.findIndex(standard => standard.id === action.payload);
             const newState = [...state.allStandards]
             if (newState[tagIndex].color === "default") {
                 newState[tagIndex].color = "primary"
@@ -30,11 +32,26 @@ const standards = (state = {allStandards: [], taggedStandards: []}, action) => {
             let updatedTagged = []
 
             for (let standard of state.allStandards) {
-                if(standard.tagged) {
+                if (standard.tagged) {
                     updatedTagged.push(standard)
                 }
             }
-            return {allStandards: newState, taggedStandards: updatedTagged}
+            return { allStandards: newState, taggedStandards: updatedTagged }
+
+        case STANDARD_ACTIONS.UNSET_STANDARDS:
+            let resetStandards = state.allStandards.map((standard) => {
+                return (
+                    {
+                        id: standard.id,
+                        standard_name: standard.standard_name,
+                        classroom_id: standard.classroom_id,
+                        color: "default",
+                        tagged: false,
+                    }
+                )
+            });
+            return state = { allStandards: resetStandards, taggedStandards: [] }
+
         default:
             return state;
     }

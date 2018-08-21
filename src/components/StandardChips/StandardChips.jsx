@@ -24,15 +24,6 @@ class ChipsArray extends React.Component {
         chipData: this.props.standards,
     };
 
-    // handleDelete = data => () => {
-    //     this.setState(state => {
-    //         const chipData = [...state.chipData];
-    //         const chipToDelete = chipData.indexOf(data);
-    //         chipData.splice(chipToDelete, 1);
-    //         return { chipData };
-    //     });
-    // };
-
 
     handleClick = (id) => {
 
