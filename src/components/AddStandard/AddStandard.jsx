@@ -3,6 +3,8 @@ import { STANDARD_ACTIONS } from '../../redux/actions/standardActions';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import StandardListItem from '../StandardListItem/StandardListItem';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AddStandard extends Component {
 
@@ -38,9 +40,12 @@ class AddStandard extends Component {
             type: STANDARD_ACTIONS.ADD_STANDARD,
             payload: this.state
         });
+        toast("Standard added!", {
+            hideProgressBar: true,
+        });
         this.setState(
             this.defaultState
-        )
+        );
     }
 
     render() {
@@ -53,6 +58,10 @@ class AddStandard extends Component {
 
         return (
             <div>
+                <ToastContainer
+                    autoClose={2500}
+                    newestOnTop
+                />
                 <form onSubmit={this.addStandard}>
                     <input
                         type="text"
@@ -63,7 +72,7 @@ class AddStandard extends Component {
                     <button type="submit">+</button>
                 </form>
 
-            <h4>Standards for {this.props.currentClassroom.classroom_name}:</h4>
+                <h4>Standards for {this.props.currentClassroom.classroom_name}:</h4>
                 <ul>
                     {standardsMapArray}
                 </ul>

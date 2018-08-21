@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
@@ -51,19 +53,26 @@ class ManageClassroom extends Component {
             type: CLASSROOM_ACTIONS.EDIT_CLASSROOM,
             payload: this.state
         });
+        toast("Classroom updated!", {
+            hideProgressBar: true,
+        });
         this.setState(
             this.defaultState
-        )
+        );
     }
 
     render() {
-        
+
 
         let content = null;
 
         if (this.props.user.userName) {
             content = (
                 <div>
+                    <ToastContainer
+                        autoClose={2500}
+                        newestOnTop
+                    />
                     <h3>Manage {this.props.currentClassroom.classroom_name}</h3>
                     <form onSubmit={this.updateClassroomName}>
                         <input
@@ -77,8 +86,8 @@ class ManageClassroom extends Component {
                         </button>
                     </form>
                     <AddStudent />
-                <AddStandard />
-                <button onClick={() => {this.props.history.push(`/scores/${this.props.currentClassroom.id}`)}}>View Classroom</button>
+                    <AddStandard />
+                    <button onClick={() => { this.props.history.push(`/scores/${this.props.currentClassroom.id}`) }}>View Classroom</button>
 
                 </div>
             );
