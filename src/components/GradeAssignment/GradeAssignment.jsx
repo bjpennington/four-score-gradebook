@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import swal from 'sweetalert';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { SCORE_ACTIONS } from '../../redux/actions/scoreActions';
@@ -9,6 +10,7 @@ import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
 
 import Nav from '../Nav/Nav';
 import GradeAssignmentListItem from '../GradeAssignmentListItem/GradeAssignmentListItem';
+
 
 class GradeAssignment extends Component {
 
@@ -61,6 +63,12 @@ class GradeAssignment extends Component {
                 payload: this.state.arrayOfChanges,
             });
         }
+        swal({
+            title: "Scores Submitted!",
+            icon: "success",
+            buttons: false,
+            timer: 2000,
+        });
     }
 
     cancelGrading = () => {
