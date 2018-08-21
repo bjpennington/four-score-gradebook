@@ -27,6 +27,21 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.get('/assignment/:id', rejectUnauthenticated, (req, res) => {
+    queryText = `SELECT DISTINCT "scores"."student_id", "students"."student_name" FROM "scores"
+                    JOIN "students" ON "scores"."student_id" = "students"."id"
+                    WHERE "scores"."assignment_id" = $1
+                    ORDER BY "students"."student_name";`;
+    pool.query(queryText, [req.params.id])
+        .then(response => {
+            res.send(response.rows);
+        })
+        .catch(error => {
+            console.log('Error on /api/student/assignment GET:', error);
+            res.sendStatus(500);
+        });
+});
+
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     queryText = `DELETE FROM "students" WHERE "id" = $1 RETURNING "classroom_id";`;
     pool.query(queryText, [req.params.id])
