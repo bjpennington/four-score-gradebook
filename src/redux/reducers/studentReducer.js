@@ -10,6 +10,16 @@ const students = (state = [], action) => {
     }
 }
 
+const assignmentStudents = (state = [], action) => {
+    switch (action.type) {
+        case STUDENT_ACTIONS.SET_ASSIGNMENT_STUDENTS:
+            return action.payload || state;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     students,
+    assignmentStudents,
 });

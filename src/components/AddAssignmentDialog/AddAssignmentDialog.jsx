@@ -4,12 +4,12 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+// import DialogContentText from '@material-ui/core/DialogContentText';
+// import DialogTitle from '@material-ui/core/DialogTitle';
 import { connect } from 'react-redux';
 import ChipsArray from '../StandardChips/StandardChips';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
-
+import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
 
 class AddAssignmentDialog extends Component {
 
@@ -29,6 +29,9 @@ class AddAssignmentDialog extends Component {
     };
 
     handleClose = () => {
+        this.props.dispatch({
+            type: STANDARD_ACTIONS.UNSET_STANDARDS,
+        });
         this.setState(this.defaultState);
     };
 

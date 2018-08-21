@@ -14,9 +14,7 @@ function* addStandard(action) {
 
 function* fetchStandard(action) {
     try {
-        console.log('assignments payload:', action.payload)
         const standards = yield call(axios.get, `/api/standard/${action.payload}`);
-        console.log(standards.data);
         yield dispatch({
             type: STANDARD_ACTIONS.SET_STANDARDS,
             payload: standards.data
@@ -29,9 +27,7 @@ function* fetchStandard(action) {
 
 function* deleteStandard(action) {
     try {
-        const classroom = yield call(axios.delete, `/api/standard/${action.payload}`);
-        console.log(classroom.data.classroom_id);
-        
+        const classroom = yield call(axios.delete, `/api/standard/${action.payload}`);        
         yield fetchStandard({payload: classroom.data.classroom_id});
     }
     catch (error) {

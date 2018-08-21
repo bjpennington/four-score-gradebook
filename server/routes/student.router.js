@@ -4,7 +4,6 @@ const {rejectUnauthenticated} = require('../modules/authentication-middleware')
 const router = express.Router();
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log(req.body);
     queryText = `INSERT INTO "students" ("student_name", "classroom_id") VALUES ($1, $2);`;
     pool.query(queryText, [req.body.newStudent, req.body.classroom_id])
         .then(response => {
@@ -17,7 +16,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('/students req.body:', req.body, '/students req.user:', req.user, 'students req.params:', req.params);
     queryText = `SELECT * FROM "students" WHERE "classroom_id" = $1;`
     pool.query(queryText, [req.params.id])
         .then(response => {
@@ -25,6 +23,21 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         })
         .catch(error => {
             console.log('Error on /api/student GET:', error)
+            res.sendStatus(500);
+        });
+});
+
+router.get('/assignment/:id', rejectUnauthenticated, (req, res) => {
+    queryText = `SELECT DISTINCT "scores"."student_id", "students"."student_name" FROM "scores"
+                    JOIN "students" ON "scores"."student_id" = "students"."id"
+                    WHERE "scores"."assignment_id" = $1
+                    ORDER BY "students"."student_name";`;
+    pool.query(queryText, [req.params.id])
+        .then(response => {
+            res.send(response.rows);
+        })
+        .catch(error => {
+            console.log('Error on /api/student/assignment GET:', error);
             res.sendStatus(500);
         });
 });

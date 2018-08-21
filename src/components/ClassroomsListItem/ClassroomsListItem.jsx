@@ -9,7 +9,6 @@ class ClassroomsListItem extends Component {
     }
 
     render() {
-        console.log('classroom:', this.props);
         return (
             <tr>
                 <td><Link to={`/scores/${this.props.classroom.id}`}>{this.props.classroom.classroom_name}</Link></td>

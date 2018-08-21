@@ -33,7 +33,6 @@ class AddStudent extends Component {
 
     addStudent = (event) => {
         event.preventDefault();
-        console.log('classroom created:', this.state);
         this.props.dispatch({
             type: STUDENT_ACTIONS.ADD_STUDENT,
             payload: this.state
@@ -53,7 +52,6 @@ class AddStudent extends Component {
 
         return (
             <div>
-                {JSON.stringify(this.props.classroomStudents)}
                 <form onSubmit={this.addStudent}>
                     <input
                         type="text"

@@ -34,7 +34,6 @@ class AddStandard extends Component {
 
     addStandard = (event) => {
         event.preventDefault();
-        console.log('standard created:', this.state);
         this.props.dispatch({
             type: STANDARD_ACTIONS.ADD_STANDARD,
             payload: this.state
@@ -54,7 +53,6 @@ class AddStandard extends Component {
 
         return (
             <div>
-                {JSON.stringify(this.props.classroomStandards)}
                 <form onSubmit={this.addStandard}>
                     <input
                         type="text"

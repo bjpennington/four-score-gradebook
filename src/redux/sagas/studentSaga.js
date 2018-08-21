@@ -14,9 +14,7 @@ function* addStudent(action) {
 
 function* fetchStudent(action) {
     try {
-        console.log('assignments payload:', action.payload)
         const students = yield call(axios.get, `/api/student/${action.payload}`);
-        console.log(students.data);
         yield dispatch({
             type: STUDENT_ACTIONS.SET_STUDENTS,
             payload: students.data
@@ -27,11 +25,22 @@ function* fetchStudent(action) {
     }
 }
 
+function* fetchAssignmentStudents(action) {
+    try {
+        const students = yield call(axios.get, `/api/student/assignment/${action.payload}`);
+        yield dispatch({
+            type: STUDENT_ACTIONS.SET_ASSIGNMENT_STUDENTS,
+            payload: students.data
+        });
+    }
+    catch (error) {
+        console.log('Error on studentSaga fetchAssignmentStudents:', error);
+    }
+}
+
 function* deleteStudent(action) {
     try {
-        const classroom = yield call(axios.delete, `/api/student/${action.payload}`);
-        console.log(classroom.data.classroom_id);
-        
+        const classroom = yield call(axios.delete, `/api/student/${action.payload}`);        
         yield fetchStudent({payload: classroom.data.classroom_id});
     }
     catch (error) {
@@ -43,6 +52,7 @@ function* studentSaga() {
     yield takeLatest(STUDENT_ACTIONS.ADD_STUDENT, addStudent);
     yield takeLatest(STUDENT_ACTIONS.FETCH_STUDENT, fetchStudent);
     yield takeLatest(STUDENT_ACTIONS.DELETE_STUDENT, deleteStudent);
+    yield takeLatest(STUDENT_ACTIONS.FETCH_ASSIGNMENT_STUDENTS, fetchAssignmentStudents);
 }
 
 export default studentSaga;

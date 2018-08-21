@@ -1,6 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool');
-const {rejectUnauthenticated} = require('../modules/authentication-middleware')
+const { rejectUnauthenticated } = require('../modules/authentication-middleware')
 const router = express.Router();
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
@@ -15,8 +15,23 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.get('/assignment/:id', rejectUnauthenticated, (req, res) => {
+    queryText = `SELECT "scores"."id", "scores"."student_id", "students"."student_name", "standards"."standard_name", "scores"."score" FROM "scores"
+                    JOIN "standards" ON "scores"."standard_id" = "standards"."id"
+                    JOIN "students" ON "scores"."student_id" = "students"."id"
+                    WHERE "scores"."assignment_id" = $1
+                    ORDER BY "students"."student_name";`;
+    pool.query(queryText, [req.params.id])
+        .then(response => {
+            res.send(response.rows)
+        })
+        .catch(error => {
+            console.log('Error on /api/score/assignment/:id GET:', error);
+            res.sendStatus(500);
+        });
+});
+
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log('SCORES POST REQ.BODY:', req.body);
     let allScores = [];
     for (let student of req.body.studentsIds) {
         let assignmentForStandard = [];
@@ -29,14 +44,32 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     queryText = `INSERT INTO "scores" ("student_id", "assignment_id", "standard_id", "classroom_id") VALUES ($1, $2, $3, $4);`
     for (let score of allScores) {
         pool.query(queryText, [score[0], score[1], score[2], score[3]])
-        .then(response => {})
-        .catch(error => {
-            console.log('Error on /api/score POST:', error);
-            isPostError = true;
-        });
+            .then(response => { })
+            .catch(error => {
+                console.log('Error on /api/score POST:', error);
+                isPostError = true;
+            });
     }
-    if (isPostError) {res.sendStatus(201)}
-    else {res.sendStatus(500)}
+    if (isPostError) { res.sendStatus(500) }
+    else { res.sendStatus(201) }
+});
+
+router.put('/', rejectUnauthenticated, (req, res) => {
+    let scoresToUpdate = req.body
+
+    let isPostError = false;
+
+    queryText = `UPDATE "scores" SET "score" = $1 WHERE "id" = $2;`;
+    for (let score of scoresToUpdate) {
+        pool.query(queryText, [score.newScore, score.scoreId])
+            .then(response => { })
+            .catch(error => {
+                console.log('Error on /api/score PUT:', error);
+                isPostError = true;
+            });
+    }
+    if (isPostError) { res.sendStatus(500) }
+    else { res.sendStatus(200) }
 });
 
 module.exports = router;

@@ -10,6 +10,16 @@ const assignments = (state = [], action) => {
     }
 }
 
+const currentAssignment = (state = {id: '', assignment_name: '', classroom_id: ''}, action) => {
+    switch (action.type) {
+        case ASSIGNMENT_ACTIONS.SET_CURRENT_ASSIGNMENT:
+            return action.payload || state;   
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     assignments,
+    currentAssignment,
 });
