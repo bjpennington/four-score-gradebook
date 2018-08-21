@@ -28,8 +28,6 @@ class GradeAssignmentListItem extends Component {
                 else { return null }
             });
 
-        console.log(this.props);
-
 
         return (
             <tr>

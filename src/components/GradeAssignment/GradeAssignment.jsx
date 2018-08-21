@@ -74,7 +74,6 @@ class GradeAssignment extends Component {
 
     render() {
         let content = null;
-        console.log(this.state.arrayOfChanges)
 
         let studentsMapArray = this.props.students.map((student, index) => {
             return (
