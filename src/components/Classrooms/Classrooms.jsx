@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
@@ -24,6 +26,9 @@ class Classrooms extends Component {
             type: CLASSROOM_ACTIONS.CREATE_CLASSROOM,
             payload: {classroom_name: 'New Classroom'}
         });
+        toast("Classroom created!", {
+            hideProgressBar: true,
+        });
     }
 
 
@@ -40,6 +45,10 @@ class Classrooms extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
+                    <ToastContainer
+                        autoClose={2500}
+                        newestOnTop
+                     />
                     <button onClick={this.handeCreateClassroom}>
                         Create New Classroom
                     </button>
