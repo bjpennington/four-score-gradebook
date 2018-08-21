@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import swal from 'sweetalert';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { SCORE_ACTIONS } from '../../redux/actions/scoreActions';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
-import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
+import { STUDENT_ACTIONS } from '../../redux/actions/studentActions';
 
 import Nav from '../Nav/Nav';
 import GradeAssignmentListItem from '../GradeAssignmentListItem/GradeAssignmentListItem';
+
 
 class GradeAssignment extends Component {
 
@@ -43,11 +45,11 @@ class GradeAssignment extends Component {
 
     editScore = (eventValue, id) => {
         let arrayToFilter = [...this.state.arrayOfChanges];
-        let filteredArray = arrayToFilter.filter(function(score) {
+        let filteredArray = arrayToFilter.filter(function (score) {
             return score.scoreId !== id
         });
         this.setState({
-            arrayOfChanges: [...filteredArray,   {
+            arrayOfChanges: [...filteredArray, {
                 newScore: eventValue,
                 scoreId: id,
             }]
@@ -61,20 +63,37 @@ class GradeAssignment extends Component {
                 payload: this.state.arrayOfChanges,
             });
         }
+        this.setState({
+            arrayOfChanges: [],
+        });
+        swal({
+            title: "Scores Submitted!",
+            icon: "success",
+            buttons: false,
+            timer: 2000,
+        });
     }
 
     cancelGrading = () => {
         if (this.state.arrayOfChanges.length > 0) {
-            if (window.confirm('Are you sure you want to cancel?')) {
-                this.props.history.push(`/scores/${this.props.assignment.classroom_id}`)
-            }
+            swal({
+                title: "Are you sure you want to leave?",
+                text: "Any changes you have made won't be saved if you leave now.",
+                buttons: [true, "Yes, View Classroom"],
+                icon: "warning",
+                dangerMode: true,
+            })
+                .then(confirmed => {
+                    if (confirmed) {
+                        this.props.history.push(`/scores/${this.props.assignment.classroom_id}`);
+                    }
+                });
         }
         else { this.props.history.push(`/scores/${this.props.assignment.classroom_id}`) }
     }
 
     render() {
         let content = null;
-        console.log(this.state.arrayOfChanges)
 
         let studentsMapArray = this.props.students.map((student, index) => {
             return (
