@@ -23,7 +23,7 @@ body {
     border-radius: 2px;
 } */
 
-/* input {
+ input {
     margin: 5px;
     margin-bottom: 10px;
 }
@@ -32,7 +32,7 @@ input[type="submit"] {
     margin: 10px;
 }
 
-.message {
+/* .message {
     padding: 10px 0;
 }
 
@@ -46,12 +46,27 @@ input[type="submit"] {
 
 .message:nth-child(even) {
     background-color: #f8f8f8;
-}
+} */
 
 .navbar {
-  background-color: #8EBE28;
-  width: 100%;
-  border-radius: 0px;
+    background-color: #8EBE28;
+    width: 100%;
+    border-radius: 0px;
+}
+
+.navlinks {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 20px;
+}
+
+#navitem1 {
+    grid-column-start: 1;
+}
+
+#navitem2 {
+    grid-column-start: 2;
+    text-align: right;
 }
 
 ul {
@@ -61,24 +76,19 @@ ul {
     overflow: hidden;
 }
 
-li {
-    float: left;
-}
-
 li a {
     display: block;
     color: white;
-    text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 
-} */
+}
 
 /* Change the link color to #111 (black) on hover */
-/* li a:hover {
+ li a:hover {
     text-decoration: underline;
     color: #eee;
-}  */
+}
 
 .swal-title {
     margin: 20px;

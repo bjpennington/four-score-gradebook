@@ -82,7 +82,7 @@ class AddAssignmentDialog extends Component {
                         <ChipsArray />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleClose} color="secondary">
                             Cancel
                         </Button>
                         <Button onClick={this.addAssignment} color="primary">

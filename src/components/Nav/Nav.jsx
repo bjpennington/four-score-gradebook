@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { triggerLogout } from '../../redux/actions/loginActions';
+import { Button } from '@material-ui/core'
 
 class Nav extends Component {
 
@@ -13,20 +14,18 @@ class Nav extends Component {
   render() {
     return (
       <div className="navbar">
-        <div>
-          <ul>
-            <li>
+          <ul className="navlinks">
+            <li id="navitem1">
               <NavLink to="/classrooms">
-                My Classrooms
+                  My Classrooms
               </NavLink>
             </li>
-            <li>
+            <li id="navitem2">
               <NavLink to="/" onClick={this.logout}>
                 Log Out
               </NavLink>
             </li>
           </ul>
-        </div>
       </div>
     )
   }
