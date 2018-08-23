@@ -5,6 +5,13 @@ import ChipsArray from '../StandardChips/StandardChips';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
 import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
 import swal from 'sweetalert';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = theme => ({
+    button: {
+        margin: 5,
+    }
+});
 
 class AddAssignmentDialog extends Component {
 
@@ -59,7 +66,7 @@ class AddAssignmentDialog extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.handleOpen}>Add Assignment</Button>
+                <Button className={this.props.classes.button} color="secondary" variant="contained" onClick={this.handleOpen}>Add Assignment</Button>
                 <Dialog
                     aria-labelledby="form-dialog-title"
                     disableBackdropClick
@@ -104,4 +111,5 @@ const mapStateToProps = (state) => {
     })
 }
 
-export default connect(mapStateToProps)(AddAssignmentDialog);
+const connectedAddAssignmentDialog = connect(mapStateToProps)(AddAssignmentDialog);
+export default withStyles(styles)(connectedAddAssignmentDialog);

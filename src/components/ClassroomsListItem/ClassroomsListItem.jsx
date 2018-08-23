@@ -40,5 +40,5 @@ class ClassroomsListItem extends Component {
 
 }
 
-let connectedClassroomsListItem = withRouter(connect()(ClassroomsListItem))
+const connectedClassroomsListItem = withRouter(connect()(ClassroomsListItem))
 export default withStyles(styles)(connectedClassroomsListItem);

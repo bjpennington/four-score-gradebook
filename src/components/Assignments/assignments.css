@@ -1,0 +1,19 @@
+
+.assignmentsGrid {
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+}
+
+.assignmentsContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    grid-column-start: 2;
+    
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+}

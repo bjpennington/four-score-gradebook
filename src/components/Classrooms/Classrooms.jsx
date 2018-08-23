@@ -26,6 +26,9 @@ const styles = theme => ({
     },
     tableCell: {
         fontSize: "50px",
+    },
+    button: {
+        margin: 5,
     }
 });
 
@@ -70,9 +73,9 @@ class Classrooms extends Component {
                         autoClose={2500}
                         newestOnTop
                     />
-                    <h2>{this.props.user.userName}'s Classrooms:</h2>
+                    <h2>{this.props.user.userName}'s Classrooms</h2>
                     <Grid container justify="center" alignItems="center">
-                    <Button width="50%" color="secondary" variant="contained" onClick={this.handeCreateClassroom}>
+                    <Button className={this.props.classes.button} width="50%" color="secondary" variant="contained" onClick={this.handeCreateClassroom}>
                         Create New Classroom
                     </Button>
                     </Grid>
