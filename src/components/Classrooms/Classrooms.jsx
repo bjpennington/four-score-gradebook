@@ -3,11 +3,31 @@ import { connect } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { Button, Table, TableBody, TableCell, TableHead, TableRow, Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 
 import Nav from '../Nav/Nav';
 import ClassroomsListItem from '../ClassroomsListItem/ClassroomsListItem';
+
+import './classrooms.css'
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+    },
+    table: {
+        minWidth: 300,
+        maxWidth: 900,
+    },
+    tableCell: {
+        fontSize: "50px",
+    }
+});
 
 class Classrooms extends Component {
     componentDidMount() {
@@ -24,7 +44,7 @@ class Classrooms extends Component {
     handeCreateClassroom = () => {
         this.props.dispatch({
             type: CLASSROOM_ACTIONS.CREATE_CLASSROOM,
-            payload: {classroom_name: 'New Classroom'}
+            payload: { classroom_name: 'New Classroom' }
         });
         toast("Classroom created!", {
             hideProgressBar: true,
@@ -44,25 +64,32 @@ class Classrooms extends Component {
 
         if (this.props.user.userName) {
             content = (
-                <div>
+                <div className="classroomsGrid">
+                <div className="classroomsContainer">
                     <ToastContainer
                         autoClose={2500}
                         newestOnTop
-                     />
-                    <button onClick={this.handeCreateClassroom}>
+                    />
+                    <h2>{this.props.user.userName}'s Classrooms:</h2>
+                    <Grid container justify="center" alignItems="center">
+                    <Button width="50%" color="secondary" variant="contained" onClick={this.handeCreateClassroom}>
                         Create New Classroom
-                    </button>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    </Button>
+                    </Grid>
+                    <Grid container justify="center" alignItems="center">
+                    <Table className={this.props.classes.table}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
                             {classroomMapArray}
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
+                    </Grid>
+                </div>
                 </div>
             );
         }
@@ -82,4 +109,5 @@ const mapStateToProps = state => ({
     currentClassroom: state.classroom.currentClassroom
 });
 
-export default connect(mapStateToProps)(Classrooms);
+const connectedClassrooms = connect(mapStateToProps)(Classrooms);
+export default withStyles(styles)(connectedClassrooms)
