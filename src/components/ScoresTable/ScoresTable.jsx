@@ -112,12 +112,12 @@ class ScoresTable extends Component {
         if (this.props.user.userName) {
             content = (
 
-                <div>
+                <div className="scoreViewGrid">
                     <h2>{this.props.currentClassroom.classroom_name}</h2>
-                    <Button className={this.props.classes.button} variant="contained" onClick={this.editClassroom}>
+                    <Button className={this.props.classes.button} variant="outlined" color="primary" onClick={this.editClassroom}>
                         Edit Classroom
                     </Button>
-                    <Button className={this.props.classes.button} variant="contained" onClick={this.goToAssignments}>
+                    <Button className={this.props.classes.button} variant="contained" color="primary" onClick={this.goToAssignments}>
                         Assignments
                     </Button>
                     <Griddle styleConfig={styleConfig} components={{Layout: NewLayout}} results={studentRows}>
