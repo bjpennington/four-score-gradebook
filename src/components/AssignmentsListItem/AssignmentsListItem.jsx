@@ -5,6 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 import {Button, TableCell, TableRow} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {Edit} from '@material-ui/icons';
+import swal from 'sweetalert';
 
 const styles = theme => ({
     root: {
@@ -26,16 +27,12 @@ const styles = theme => ({
 
 
 class AssignmentsListItem extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            editMode: false,
-        }
-    }
 
     editAssignment = () => {
-        this.setState({
-            editMode: true
+        swal({
+            icon: 'info',
+            title: 'Coming soon!',
+            text: 'Edit functionality is under construction.'
         })
     }
 
