@@ -8,7 +8,7 @@ body {
     font-weight: 900;
     font-size: 60px;
     text-align: center;
-    color: white;
+    color: #212121;
     margin: 20px;
 }
 
@@ -16,7 +16,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #8EBE28;
+    background-color: #c1f15d;
     padding: 5px;
 }
 
@@ -55,7 +55,7 @@ input[type="submit"] {
 } */
 
 .navbar {
-    background-color: #8EBE28;
+    background-color: #c1f15d;
     width: 100%;
     border-radius: 0px;
 }
@@ -83,7 +83,7 @@ ul {
 
 li a {
     display: block;
-    color: white;
+    color: #212121;
     padding: 14px 16px;
     text-decoration: none;
 
@@ -92,7 +92,7 @@ li a {
 /* Change the link color to #111 (black) on hover */
  li a:hover {
     text-decoration: underline;
-    color: #eee;
+    color: #ba000d;
 }
 
 .swal-title {

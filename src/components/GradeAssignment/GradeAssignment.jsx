@@ -8,9 +8,26 @@ import { SCORE_ACTIONS } from '../../redux/actions/scoreActions';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
 import { STUDENT_ACTIONS } from '../../redux/actions/studentActions';
 
+import {Table, TableHead, TableBody, TableRow, TableCell, Button} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+
 import Nav from '../Nav/Nav';
 import GradeAssignmentListItem from '../GradeAssignmentListItem/GradeAssignmentListItem';
 
+const styles = theme => ({
+    root: {
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+    },
+    table: {
+        minWidth: 300,
+        margin: 25,
+    },
+    button: {
+        margin: 5,
+    }
+})
 
 class GradeAssignment extends Component {
 
@@ -104,23 +121,22 @@ class GradeAssignment extends Component {
         if (this.props.user.userName) {
             content = (
                 <div>
-                    <h3>
+                    <h2>
                         {this.props.assignment.assignment_name}
-                    </h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Student</th>
-                                <th>Standard</th>
-                                <th>Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    </h2>
+                    <Table className={this.props.classes.table}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Student</TableCell>
+                                <TableCell>Standard</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
                             {studentsMapArray}
-                        </tbody>
-                    </table>
-                    <button onClick={this.cancelGrading}>Back to Classroom</button>
-                    <button onClick={this.sendScoreUpdates}>Submit</button>
+                        </TableBody>
+                    </Table>
+                    <Button className={this.props.classes.button} variant="contained" onClick={this.cancelGrading}>Back to Classroom</Button>
+                    <Button className={this.props.classes.button} variant="contained" color="primary" onClick={this.sendScoreUpdates}>Submit</Button>
                 </div>
             );
         }
@@ -141,4 +157,6 @@ const mapStateToProps = state => ({
     students: state.student.assignmentStudents,
 });
 
-export default withRouter(connect(mapStateToProps)(GradeAssignment));
+const connectedGradeAssignment = withRouter(connect(mapStateToProps)(GradeAssignment));
+
+export default withStyles(styles)(connectedGradeAssignment);

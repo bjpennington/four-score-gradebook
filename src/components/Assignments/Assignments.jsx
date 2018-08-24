@@ -76,7 +76,7 @@ class Assignments extends Component {
                     <div className="assignmentsContainer">
                         <h2>Assignments for {this.props.classroom.classroom_name}</h2>
                         <Grid container justify="center" alignItems="center">
-                            <Button className={this.props.classes.button} color="primary" variant="contained" onClick={() => { this.props.history.push(`/scores/${this.props.match.params.id}`) }}>Back to Classroom</Button>
+                            <Button className={this.props.classes.button} variant="contained" onClick={() => { this.props.history.push(`/scores/${this.props.match.params.id}`) }}>Back to Classroom</Button>
                             <AddAssignmentDialog />
                         </Grid>
                         <Grid container justify="center" alignItems="center">

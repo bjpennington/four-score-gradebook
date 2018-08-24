@@ -75,7 +75,7 @@ class Classrooms extends Component {
                     />
                     <h2>{this.props.user.userName}'s Classrooms</h2>
                     <Grid container justify="center" alignItems="center">
-                    <Button className={this.props.classes.button} width="50%" color="secondary" variant="contained" onClick={this.handeCreateClassroom}>
+                    <Button className={this.props.classes.button} width="50%" color="primary" variant="contained" onClick={this.handeCreateClassroom}>
                         Create New Classroom
                     </Button>
                     </Grid>

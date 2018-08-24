@@ -66,7 +66,7 @@ class AddAssignmentDialog extends Component {
     render() {
         return (
             <div>
-                <Button className={this.props.classes.button} color="secondary" variant="contained" onClick={this.handleOpen}>Add Assignment</Button>
+                <Button className={this.props.classes.button} color="primary" variant="contained" onClick={this.handleOpen}>Add Assignment</Button>
                 <Dialog
                     aria-labelledby="form-dialog-title"
                     disableBackdropClick
