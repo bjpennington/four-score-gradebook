@@ -4,10 +4,34 @@ import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
+import { withStyles } from '@material-ui/core/styles';
+import { TextField, Button} from '@material-ui/core';
+
+import './login.css';
 
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
+});
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  menu: {
+    width: 200,
+  },
+  button: {
+    margin: 10,
+    display: 'flex',
+    alignItems: 'center',
+  }
 });
 
 class LoginPage extends Component {
@@ -50,51 +74,78 @@ class LoginPage extends Component {
   renderAlert() {
     if (this.props.login.message !== '') {
       return (
-        <h2
-          className="alert"
-          role="alert"
+        <div>
+        <TextField
+          error
+          label="Username"
+          id="username"
+          className={this.props.classes.textField}
+          helperText={this.props.login.message}
+          margin="normal"
+          placeholder="Username"
+          onChange={this.handleInputChangeFor('username')}
         >
-          {this.props.login.message}
-        </h2>
+        </TextField>
+        <TextField
+          error
+          label="Password"
+          id="password"
+          className={this.props.classes.textField}
+          margin="normal"
+          placeholder="Password"
+          value={this.state.password}
+          onChange={this.handleInputChangeFor('password')}
+          type="password"
+        >
+        </TextField>
+        </div>
       );
     }
-    return (<span />);
+    return (
+      <div>
+      <TextField
+        label="Username"
+        id="username"
+        className={this.props.classes.textField}
+        helperText={this.props.login.message}
+        margin="normal"
+        placeholder="Username"
+        onChange={this.handleInputChangeFor('username')}
+      >
+      </TextField>
+      <TextField
+        label="Password"
+        id="password"
+        className={this.props.classes.textField}
+        margin="normal"
+        placeholder="Password"
+        value={this.state.password}
+        onChange={this.handleInputChangeFor('password')}
+        type="password"
+      >
+      </TextField>
+      </div>
+    );
   }
 
   render() {
     return (
-      <div>
-        {this.renderAlert()}
+      <div className="loginFlexbox">
+      <h1>Log In</h1>
         <form onSubmit={this.login}>
-          <h1>Log In</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
+
+          {this.renderAlert()}
+          <div className="loginFlexbox">
+            <Button
+              className={this.props.classes.button}
               type="submit"
               name="submit"
               value="Sign In"
-            />
+              variant="contained"
+              color="primary"
+            >
+            Sign In
+            </Button>
             <br />
             <Link to="/register">New user? Click here to register.</Link>
           </div>
@@ -104,4 +155,5 @@ class LoginPage extends Component {
   }
 }
 
-export default connect(mapStateToProps)(LoginPage);
+const connectedLoginPage = connect(mapStateToProps)(LoginPage);
+export default withStyles(styles)(connectedLoginPage)
