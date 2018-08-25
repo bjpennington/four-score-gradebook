@@ -6,6 +6,30 @@ import StandardListItem from '../StandardListItem/StandardListItem';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Button, TextField, Chip} from '@material-ui/core';
+import {withStyles} from '@material-ui/core/styles';
+import {Add} from '@material-ui/icons';
+import './addStandard.css';
+
+const styles = theme => ({
+    root: {
+      width: '100%',
+      marginTop: theme.spacing.unit * 3,
+      overflowX: 'auto',
+    },
+    table: {
+      minWidth: 300,
+      maxWidth: '40%',
+      margin: 10,
+    },
+    button: {
+        margin: 10,
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+    },
+  });
 
 class AddStandard extends Component {
 
@@ -58,19 +82,22 @@ class AddStandard extends Component {
         })
 
         return (
-            <div>
+            <div className="addStandardFlexbox">
                 <ToastContainer
                     autoClose={2500}
                     newestOnTop
                 />
                 <form onSubmit={this.addStandard}>
-                    <input
+                    <TextField
                         type="text"
                         placeholder="Standard"
+                        id="standard"
+                        label="Classroom Standard"
                         value={this.state.newStandard}
                         onChange={this.handleChangeFor('newStandard')}
-                    />
-                    <button type="submit">+</button>
+                    >
+                    </TextField>
+                    <Button mini variant="fab" color="secondary" type="submit"><Add /></Button>
                 </form>
 
                 <h4>Standards for {this.props.currentClassroom.classroom_name}:</h4>
@@ -89,4 +116,5 @@ const mapStateToProps = (state) => {
     })
 }
 
-export default withRouter(connect(mapStateToProps)(AddStandard));                  
+const connectedAddStandard = withRouter(connect(mapStateToProps)(AddStandard));
+export default withStyles(styles)(connectedAddStandard);
