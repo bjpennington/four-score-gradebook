@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { STUDENT_ACTIONS } from '../../redux/actions/studentActions';
 import swal from 'sweetalert';
 import {TableRow, TableCell, Button} from '@material-ui/core';
-import {Delete} from '@material-ui/icons';
+import {RemoveCircleOutline} from '@material-ui/icons';
 
 class StudentListItem extends Component {
 
@@ -29,7 +29,7 @@ class StudentListItem extends Component {
         return (
             <TableRow>
                 <TableCell>{this.props.student.student_name}</TableCell>
-                <TableCell><Button mini color="primary" onClick={this.deleteStudent}><Delete /></Button></TableCell>
+                <TableCell><Button mini color="primary" onClick={this.deleteStudent}><RemoveCircleOutline /></Button></TableCell>
             </TableRow>
         )
     }
