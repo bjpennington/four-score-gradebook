@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
-// import DialogTitle from '@material-ui/core/DialogTitle';
+import {Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle} from '@material-ui/core';
 import { connect } from 'react-redux';
 import ChipsArray from '../StandardChips/StandardChips';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
 import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
 import swal from 'sweetalert';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = theme => ({
+    button: {
+        margin: 5,
+    }
+});
 
 class AddAssignmentDialog extends Component {
 
@@ -65,7 +66,7 @@ class AddAssignmentDialog extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.handleOpen}>Add Assignment</Button>
+                <Button className={this.props.classes.button} color="primary" variant="contained" onClick={this.handleOpen}>Add Assignment</Button>
                 <Dialog
                     aria-labelledby="form-dialog-title"
                     disableBackdropClick
@@ -84,11 +85,11 @@ class AddAssignmentDialog extends Component {
                             onChange={this.handleAssignmentInputChange}
                             value={this.state.assignment_name}
                         />
-                        <h3>Select Assignment Standards:</h3>
+                        <DialogTitle>Select Assignment Standards:</DialogTitle>
                         <ChipsArray />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleClose} color="secondary">
                             Cancel
                         </Button>
                         <Button onClick={this.addAssignment} color="primary">
@@ -110,4 +111,5 @@ const mapStateToProps = (state) => {
     })
 }
 
-export default connect(mapStateToProps)(AddAssignmentDialog);
+const connectedAddAssignmentDialog = connect(mapStateToProps)(AddAssignmentDialog);
+export default withStyles(styles)(connectedAddAssignmentDialog);

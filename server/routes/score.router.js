@@ -20,7 +20,7 @@ router.get('/assignment/:id', rejectUnauthenticated, (req, res) => {
                     JOIN "standards" ON "scores"."standard_id" = "standards"."id"
                     JOIN "students" ON "scores"."student_id" = "students"."id"
                     WHERE "scores"."assignment_id" = $1
-                    ORDER BY "students"."student_name";`;
+                    ORDER BY "students"."student_name", "standards"."standard_name";`;
     pool.query(queryText, [req.params.id])
         .then(response => {
             res.send(response.rows)

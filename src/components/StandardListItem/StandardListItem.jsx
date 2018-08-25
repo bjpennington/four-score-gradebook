@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
 import swal from 'sweetalert';
+import {withStyles} from '@material-ui/core/styles';
+import {Chip} from '@material-ui/core';
+
+const styles = theme => ({
+    root: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        padding: theme.spacing.unit / 2,
+    },
+    chip: {
+        margin: theme.spacing.unit / 2,
+    },
+});
 
 class StandardListItem extends Component {
 
@@ -25,9 +39,10 @@ class StandardListItem extends Component {
 
     render() {
         return (
-            <li>{this.props.standard.standard_name} <button onClick={this.deleteStandard}>X</button></li>
+            <Chip color="primary" label={this.props.standard.standard_name} onDelete={this.deleteStandard} className={this.props.classes.chip}></Chip>
         )
     }
 }
 
-export default connect()(StandardListItem);
+const connectedStandardListItem = connect()(StandardListItem);
+export default withStyles(styles)(connectedStandardListItem);

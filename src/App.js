@@ -5,6 +5,7 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
@@ -18,44 +19,71 @@ import NotFound from './components/NotFound/NotFound';
 
 import './styles/main.css';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#8EBE28'
+    },
+    secondary: {
+      main: '#f44336',
+    }
+  },
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  }
+});
+
 const App = () => (
   <div>
-    <Header title="FourScore" />
-    <Router>
-      <Switch>
-        <Redirect exact from="/" to="/home" />
-        <Route
-          path="/home"
-          component={LoginPage}
-        />
-        <Route
-          path="/register"
-          component={RegisterPage}
-        />
-        <Route
-          path="/classrooms"
-          component={Classrooms}
-        />
-        <Route
-          path="/assignments/:id"
-          component={Assignments}
-        />
-        <Route
-          path="/grade/:id"
-          component={GradeAssignment}
-        />
-        <Route
-          path="/manage_classroom/:id"
-          component={ManageClassroom}
-        />
-        <Route
-          path="/scores/:id"
-          component={ScoresTable}
-        />
-        {/* OTHERWISE (no path!) */}
-        <Route component={NotFound} />
-      </Switch>
-    </Router>
+    <MuiThemeProvider theme={theme}>
+      <Header title="FourScore" />
+      <Router>
+        <Switch>
+          <Redirect exact from="/" to="/home" />
+          <Route
+            path="/home"
+            component={LoginPage}
+          />
+          <Route
+            path="/register"
+            component={RegisterPage}
+          />
+          <Route
+            path="/classrooms"
+            component={Classrooms}
+          />
+          <Route
+            path="/assignments/:id"
+            component={Assignments}
+          />
+          <Route
+            path="/grade/:id"
+            component={GradeAssignment}
+          />
+          <Route
+            path="/manage_classroom/:id"
+            component={ManageClassroom}
+          />
+          <Route
+            path="/scores/:id"
+            component={ScoresTable}
+          />
+          {/* OTHERWISE (no path!) */}
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    </MuiThemeProvider>
   </div>
 );
 

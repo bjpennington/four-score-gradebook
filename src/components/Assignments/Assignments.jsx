@@ -4,12 +4,34 @@ import { connect } from 'react-redux';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { ASSIGNMENT_ACTIONS } from '../../redux/actions/assignmentActions';
-import {STANDARD_ACTIONS} from '../../redux/actions/standardActions';
-import {STUDENT_ACTIONS} from '../../redux/actions/studentActions';
+import { STANDARD_ACTIONS } from '../../redux/actions/standardActions';
+import { STUDENT_ACTIONS } from '../../redux/actions/studentActions';
+
+import { Button, Table, TableBody, TableCell, TableHead, TableRow, Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 import Nav from '../Nav/Nav';
 import AssignmentsListItem from '../AssignmentsListItem/AssignmentsListItem';
 import AddAssignmentDialog from '../AddAssignmentDialog/AddAssignmentDialog';
+
+import './assignments.css';
+const styles = theme => ({
+    root: {
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+    },
+    table: {
+        minWidth: 300,
+        maxWidth: 900,
+    },
+    tableCell: {
+        fontSize: "50px",
+    },
+    button: {
+        margin: 5,
+    }
+});
 
 class Assignments extends Component {
     componentDidMount() {
@@ -50,21 +72,28 @@ class Assignments extends Component {
 
         if (this.props.user.userName) {
             content = (
-                <div>
-                    <button onClick={() => {this.props.history.push(`/scores/${this.props.match.params.id}`)}}>Back to Classroom</button>
-                    <AddAssignmentDialog />
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {assignmentMapArray}
-                        </tbody>
-                    </table>
+                <div className="assignmentsGrid">
+                    <div className="assignmentsContainer">
+                        <h2>Assignments for {this.props.classroom.classroom_name}</h2>
+                        <Grid container justify="center" alignItems="center">
+                            <Button className={this.props.classes.button} variant="contained" onClick={() => { this.props.history.push(`/scores/${this.props.match.params.id}`) }}>Back to Classroom</Button>
+                            <AddAssignmentDialog />
+                        </Grid>
+                        <Grid container justify="center" alignItems="center">
+                        <Table className={this.props.classes.table}>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell></TableCell>
+                                    <TableCell></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {assignmentMapArray}
+                            </TableBody>
+                        </Table>
+                    </Grid>
                 </div>
+                </div >
             );
         }
 
@@ -79,7 +108,9 @@ class Assignments extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
-    assignments: state.assignment.assignments
+    assignments: state.assignment.assignments,
+    classroom: state.classroom.currentClassroom,
 });
 
-export default connect(mapStateToProps)(Assignments);
+const connectedAssignments = connect(mapStateToProps)(Assignments);
+export default withStyles(styles)(connectedAssignments);

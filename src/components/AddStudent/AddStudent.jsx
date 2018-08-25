@@ -6,6 +6,33 @@ import StudentListItem from '../StudentListItem/StudentListItem';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import {Button, Table, TableRow, TableCell, TableBody, TableHead, TextField} from '@material-ui/core';
+import {Add} from '@material-ui/icons';
+import {withStyles} from '@material-ui/core/styles'
+
+import './addStudent.css';
+
+const styles = theme => ({
+    root: {
+      width: '100%',
+      marginTop: theme.spacing.unit * 3,
+      overflowX: 'auto',
+    },
+    table: {
+      minWidth: 300,
+      maxWidth: '40%',
+      margin: 10,
+    },
+    button: {
+        margin: 10,
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+    },
+  });
+
 class AddStudent extends Component {
 
     defaultState = {
@@ -56,33 +83,36 @@ class AddStudent extends Component {
         })
 
         return (
-            <div>
+            <div className="addStudentFlexbox">
                 <ToastContainer
                     autoClose={2500}
                     newestOnTop
                 />
                 <form onSubmit={this.addStudent}>
-                    <input
+                    <TextField
                         type="text"
                         placeholder="Student Name"
+                        id="studentName"
+                        label="Student Name"
                         value={this.state.newStudent}
                         onChange={this.handleChangeFor('newStudent')}
-                    />
-                    <button type="submit">+</button>
+                    >
+                    </TextField>
+                    <Button variant="fab" mini color="secondary" type="submit"><Add /></Button>
                 </form>
 
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Students</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Table className={this.props.classes.table}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Students</TableCell>
+                            <TableCell>Delete</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         {studentsMapArray}
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
             </div>
         )
     }
@@ -94,4 +124,5 @@ const mapStateToProps = (state) => {
     })
 }
 
-export default withRouter(connect(mapStateToProps)(AddStudent));                  
+const connectedAddStudent = withRouter(connect(mapStateToProps)(AddStudent));
+export default withStyles(styles)(connectedAddStudent);

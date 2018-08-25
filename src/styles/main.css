@@ -1,17 +1,23 @@
-/* body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body {
+    font-family: 'Work Sans', Arial, sans-serif;
+    font-weight: 400;
     margin: 0;
 }
 
 .instructions h1 {
-    font-size: 24px;
-    font-weight: 700;
+    font-weight: 900;
+    font-size: 60px;
+    text-align: center;
+    color: #212121;
+    margin: 20px;
 }
 
 .instructions {
-    background-color: #8EBE28;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c1f15d;
     padding: 5px;
-    color: #ece7e7;
 }
 
 /* form {
@@ -23,7 +29,7 @@
     border-radius: 2px;
 } */
 
-/* input {
+ input {
     margin: 5px;
     margin-bottom: 10px;
 }
@@ -32,7 +38,7 @@ input[type="submit"] {
     margin: 10px;
 }
 
-.message {
+/* .message {
     padding: 10px 0;
 }
 
@@ -46,12 +52,26 @@ input[type="submit"] {
 
 .message:nth-child(even) {
     background-color: #f8f8f8;
-}
+} */
 
 .navbar {
-  background-color: #8EBE28;
-  width: 100%;
-  border-radius: 0px;
+    background-color: #c1f15d;
+    width: 100%;
+    border-radius: 0px;
+}
+
+.navlinks {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+#navitem1 {
+    grid-column-start: 1;
+}
+
+#navitem2 {
+    grid-column-start: 2;
+    text-align: right;
 }
 
 ul {
@@ -59,26 +79,21 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-} */
+}
 
-/* li {
-    float: left;
-} */
-
-/* li a {
+li a {
     display: block;
-    color: white;
-    text-align: center;
+    color: #212121;
     padding: 14px 16px;
     text-decoration: none;
 
-} */
+}
 
 /* Change the link color to #111 (black) on hover */
-/* li a:hover {
+ li a:hover {
     text-decoration: underline;
-    color: #eee;
-} */ */
+    color: #ba000d;
+}
 
 .swal-title {
     margin: 20px;

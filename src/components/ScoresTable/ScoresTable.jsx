@@ -1,15 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Griddle from 'griddle-react';
+import Griddle, { plugins, RowDefinition, ColumnDefinition } from 'griddle-react';
 
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { STANDARD_ACTIONS } from '../../redux/actions/standardActions';
 import { STUDENT_ACTIONS } from '../../redux/actions/studentActions';
 import { SCORE_ACTIONS } from '../../redux/actions/scoreActions';
+import { withStyles } from '@material-ui/core/styles';
+
+import { Button } from '@material-ui/core';
 
 import Nav from '../Nav/Nav';
 
+import './scoreTable.css';
+
+const styles = theme => ({
+    button: {
+        margin: 5,
+    },
+    input: {
+        display: 'none',
+    },
+});
+
+const styleConfig = {
+    styles: {
+      Table: {
+          border: "20px solid green ",
+          maxWidth: "80%",
+        },
+      Cell: {backgroundColor: "green"}
+    }
+  }
+
+const NewLayout = ({ Table, Pagination, Filter, SettingsWrapper }) => (
+    <div>
+      <Table />
+    </div>
+  );
 
 class ScoresTable extends Component {
     componentDidMount() {
@@ -64,9 +93,9 @@ class ScoresTable extends Component {
                     }
                 )
             })
-            
-            const standardsObject = standardsHeader.reduce((accumulator, currentValue)=> {
-                return {...accumulator, ...currentValue}
+
+            const standardsObject = standardsHeader.reduce((accumulator, currentValue) => {
+                return { ...accumulator, ...currentValue }
             }, {})
 
             return (
@@ -83,18 +112,19 @@ class ScoresTable extends Component {
         if (this.props.user.userName) {
             content = (
 
-                <div>
-                    <h3>{this.props.currentClassroom.classroom_name}</h3>
-                    <p>
-                        Scores Table
-                    </p>
-                    <Griddle results={studentRows} />
-                    <button onClick={this.editClassroom}>
+                <div className="scoreViewGrid">
+                    <h2>{this.props.currentClassroom.classroom_name}</h2>
+                    <Button className={this.props.classes.button} variant="outlined" color="primary" onClick={this.editClassroom}>
                         Edit Classroom
-                    </button>
-                    <button onClick={this.goToAssignments}>
+                    </Button>
+                    <Button className={this.props.classes.button} variant="contained" color="primary" onClick={this.goToAssignments}>
                         Assignments
-                    </button>
+                    </Button>
+                    <Griddle styleConfig={styleConfig} components={{Layout: NewLayout}} results={studentRows}>
+                        <RowDefinition>
+                            <ColumnDefinition id="student" title="Student" />
+                        </RowDefinition>
+                    </Griddle>
                 </div>
             );
         }
@@ -116,4 +146,5 @@ const mapStateToProps = state => ({
     scores: state.score.scores,
 });
 
-export default connect(mapStateToProps)(ScoresTable);
+const connectedScoresTable = connect(mapStateToProps)(ScoresTable);
+export default withStyles(styles)(connectedScoresTable);

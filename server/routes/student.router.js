@@ -16,7 +16,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    queryText = `SELECT * FROM "students" WHERE "classroom_id" = $1;`
+    queryText = `SELECT * FROM "students" WHERE "classroom_id" = $1
+                    ORDER BY "student_name";`
     pool.query(queryText, [req.params.id])
         .then(response => {
             res.send(response.rows)

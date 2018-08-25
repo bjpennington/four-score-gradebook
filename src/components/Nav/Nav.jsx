@@ -13,20 +13,18 @@ class Nav extends Component {
   render() {
     return (
       <div className="navbar">
-        <div>
-          <ul>
-            <li>
+          <ul className="navlinks">
+            <li id="navitem1">
               <NavLink to="/classrooms">
-                My Classrooms
+                  My Classrooms
               </NavLink>
             </li>
-            <li>
+            <li id="navitem2">
               <NavLink to="/" onClick={this.logout}>
                 Log Out
               </NavLink>
             </li>
           </ul>
-        </div>
       </div>
     )
   }

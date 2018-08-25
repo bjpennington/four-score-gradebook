@@ -2,6 +2,31 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import { withStyles } from '@material-ui/core/styles';
+import { TextField, Button} from '@material-ui/core';
+
+import './register.css';
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  menu: {
+    width: 200,
+  },
+  button: {
+    margin: 10,
+    display: 'flex',
+    alignItems: 'center',
+  }
+});
+
 class RegisterPage extends Component {
   constructor(props) {
     super(props);
@@ -54,52 +79,85 @@ class RegisterPage extends Component {
   renderAlert() {
     if (this.state.message !== '') {
       return (
-        <h2
-          className="alert"
-          role="alert"
+        <div>
+        <TextField
+          error
+          label="Username"
+          id="username"
+          className={this.props.classes.textField}
+          helperText={this.state.message}
+          margin="normal"
+          placeholder="Username"
+          onChange={this.handleInputChangeFor('username')}
         >
-          {this.state.message}
-        </h2>
+        </TextField>
+        <TextField
+          error
+          label="Password"
+          id="password"
+          className={this.props.classes.textField}
+          margin="normal"
+          placeholder="Password"
+          value={this.state.password}
+          onChange={this.handleInputChangeFor('password')}
+          type="password"
+        >
+        </TextField>
+        </div>
       );
     }
-    return (<span />);
+    return (
+      <div>
+      <TextField
+        label="Username"
+        id="username"
+        className={this.props.classes.textField}
+        helperText={this.state.message}
+        margin="normal"
+        placeholder="Username"
+        onChange={this.handleInputChangeFor('username')}
+      >
+      </TextField>
+      <TextField
+        label="Password"
+        id="password"
+        className={this.props.classes.textField}
+        margin="normal"
+        placeholder="Password"
+        value={this.state.password}
+        onChange={this.handleInputChangeFor('password')}
+        type="password"
+      >
+      </TextField>
+      </div>
+    );
   }
 
   render() {
     return (
-      <div>
-        {this.renderAlert()}
-        <form onSubmit={this.registerUser}>
+      <div className="registerFlexbox">
           <h1>Register User</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
+        <form onSubmit={this.registerUser}>
+          {this.renderAlert()}
+          <div className="registerFlexbox">
+            <Button
+              className={this.props.classes.button}
               type="submit"
               name="submit"
               value="Register"
-            />
-            <Link to="/home">Cancel</Link>
+              variant="contained"
+              color="primary"
+            >
+              Register
+            </Button>
+            <Link to="/home">
+            <Button
+              variant="outlined"
+              color="secondary"
+            >
+              Cancel
+            </Button>
+            </Link>
           </div>
         </form>
       </div>
@@ -107,5 +165,5 @@ class RegisterPage extends Component {
   }
 }
 
-export default RegisterPage;
+export default withStyles(styles)(RegisterPage);
 
