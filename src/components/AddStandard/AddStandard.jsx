@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import StandardListItem from '../StandardListItem/StandardListItem';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Button, TextField, Chip} from '@material-ui/core';
+import {Button, TextField} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import {Add} from '@material-ui/icons';
 import './addStandard.css';
@@ -101,9 +101,9 @@ class AddStandard extends Component {
                 </form>
 
                 <h4>Standards for {this.props.currentClassroom.classroom_name}:</h4>
-                <ul>
+                <div>
                     {standardsMapArray}
-                </ul>
+                </div>
             </div>
         )
     }
