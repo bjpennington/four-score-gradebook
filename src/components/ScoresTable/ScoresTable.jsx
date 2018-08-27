@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Griddle, { plugins, RowDefinition, ColumnDefinition } from 'griddle-react';
+import Griddle from 'griddle-react';
 
 import { CLASSROOM_ACTIONS } from '../../redux/actions/classroomActions';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -23,22 +23,6 @@ const styles = theme => ({
         display: 'none',
     },
 });
-
-const styleConfig = {
-    styles: {
-      Table: {
-          border: "20px solid green ",
-          maxWidth: "80%",
-        },
-      Cell: {backgroundColor: "green"}
-    }
-  }
-
-const NewLayout = ({ Table, Pagination, Filter, SettingsWrapper }) => (
-    <div>
-      <Table />
-    </div>
-  );
 
 class ScoresTable extends Component {
     componentDidMount() {
@@ -76,6 +60,7 @@ class ScoresTable extends Component {
     }
 
     render() {
+        console.log(this.props)
 
         let studentRows = this.props.students.map((student) => {
 
@@ -120,11 +105,7 @@ class ScoresTable extends Component {
                     <Button className={this.props.classes.button} variant="contained" color="primary" onClick={this.goToAssignments}>
                         Assignments
                     </Button>
-                    <Griddle styleConfig={styleConfig} components={{Layout: NewLayout}} results={studentRows}>
-                        <RowDefinition>
-                            <ColumnDefinition id="student" title="Student" />
-                        </RowDefinition>
-                    </Griddle>
+                    <Griddle results={studentRows} />
                 </div>
             );
         }
